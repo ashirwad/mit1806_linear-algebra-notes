@@ -3,3 +3,8 @@
 .RData
 .Ruserdata
 *.Rproj
+
+# arara-generated files
+build/
+*.log
+*.pdf
