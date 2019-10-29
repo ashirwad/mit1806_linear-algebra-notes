@@ -1,0 +1,166 @@
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% LaTeX Cheat Sheet von LaTeX4EI                                                                        
+%
+% @encode:      UTF-8, tabwidth = 4, newline = LF
+% @author:      Emanuel Regnath
+% @date:                
+%
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+
+%---------------------------------------%
+%                       P R E A M B L E                         %
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
+% arara: indent: {overwrite: yes, silent: yes}
+\PassOptionsToPackage{english}{babel}
+
+% Document Class ===============================================================
+\documentclass[fs, footer]{latex4ei}
+
+\usepackage{cprotect}
+\usepackage{hyperref}
+\usepackage{scientific}
+
+% My packages
+\usepackage{makecell}
+
+% language
+\selectlanguage{english}
+
+%colors
+\colorlet{sectioncolor}{tum_blue_dark2}
+
+% Idee: eigene farbe {blue_dark1}, Zuweisungsfarbe {col:section} oder {col:table}
+% Für \code in sectionbox: neue sectionbox als umgebung mit minipage
+
+
+
+% Source Code Listings =========================================================
+\usepackage{listings}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+    backgroundcolor=\color{lbcolor},
+    basicstyle=\tt,
+    tabsize=2,
+    language={[LaTeX]TeX},
+    %upquote=true,
+    aboveskip={0.4\baselineskip},
+    belowskip={0.4\baselineskip},
+    abovecaptionskip={\baselineskip},
+    belowcaptionskip={0\baselineskip},
+    columns=fixed,
+    showstringspaces=false,
+    extendedchars=true,
+    linewidth=6.7cm,
+    xleftmargin={3pt},
+    %framexleftmargin={10pt},
+    framexrightmargin={2pt},
+    %framextopmargin={9pt},
+    %framexbottommargin={9pt},
+    %breaklines=true,
+    prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    identifierstyle=\ttfamily,
+    %tagstyle=\bf,
+    keywordstyle=\color{tum_blue_dark},
+    commentstyle=\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\color[rgb]{0.8,  0.1,  0.1},
+}
+
+\let\myverb\lstinline
+\let\code\lstinline
+%\renewcommand{\code}[1]{\lstinline?#1?}
+
+\usepackage{fancyvrb} 
+\usepackage{verbdef} 
+\DefineShortVerb{\#}
+
+
+
+\fancyfoot[R]{Created \today \ at \thistime \qquad \thepage}
+\fancyfoot[L]{Homepage: \href{www.latex4ei.de}{www.latex4ei.de} -- please report misstakes \emph{immediately}.}
+\fancyfoot[C]{by Emanuel Regnath, contact \emph{\href{mailto:emanuel.regnath@tum.de}{emanuel.regnath@tum.de}}}
+
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+% Hyperref
+\hypersetup{
+        pdfcreator={LaTeX2e},
+        pdfborder=0 0 0,
+        breaklinks=true,
+        bookmarksopen=true,
+        bookmarksnumbered=true,
+        linkcolor=tum_blue_dark,
+        urlcolor=tum_blue_dark,
+        citecolor=tum_blue_dark,
+        colorlinks=true
+}
+
+
+% make boxes robust for verbatim
+\let\oldsectionbox\sectionbox
+\outer\def\sectionbox{\icprotect\oldsectionbox}
+
+
+%---------------------------------------%
+%                       LaTeX Cheat Sheet                       %
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
+
+% DOCUMENT_BEGIN ===============================================================
+\begin{document}
+
+% Split in 4 Columns ===========================================================
+\begin{multicols*}{4}
+
+% TITLE ========================================================================
+\fstitle{MIT 18.06 Notes \\[0.3em] {\normalfont \small Notes from Dr. Strang's course on linear algebra}}
+
+
+%{\large Principle: “Write clear \& beautiful english with \textrm{\LaTeX}!”}
+% options for environments \tabcolsep
+% links to package description in headings
+% lstlisting, subfigure
+% how to include beautiful matlab plots
+% overwiev of important packages:
+% multicol, rotate, chem
+
+
+% SECTION ====================================================================================
+\section{Geometry of linear equations}
+% ============================================================================================
+
+\sectionbox{
+        \subsection{Overview}
+        This lecture mainly discusses the three visualization techniques--matrix picture, row picture, and column picture--that are typically used for understanding linear equations, and very briefly touches upon the concepts of linear combination and matrix multiplication.  
+}
+
+\sectionbox{
+        \subsection{Linear system visualization techniques}
+        Dr. Strang proposed the following three visual techniques to understand a linear system of equations before solving them:
+        
+        \begin{tabular}{@{}ll@{}}\trule
+                \textrm{Picture type} & \textrm{Explanation} \\ \mrule
+                Matrix picture & \makecell[tl]{It's the algebra way to visualize a linear system using \\ the equation $Ax = b$*} \\
+                Row picture & \makecell[tl]{It's the picture created from plotting the solutions to \\ each equation (or row of $A$) in the linear system} \\
+                Column picture & \makecell[tl]{It's the picture created from plotting the columns of \\ $A$ and their linear combination that yields $b$} \\ \brule
+        \end{tabular}
+        *$A$ is the coefficient matrix, $x$ is the vector of unknowns, and $b$ is the right-hand side vector \\
+
+        The subsequent sections show the examples of matrix picture, row picture, and column picture for $2 \times 2$ and $3 \times 3$ system of equations.
+}
+
+% Ende der Spalten
+\end{multicols*}
+
+% Dokumentende
+% ======================================================================
+\end{document}
+
+
