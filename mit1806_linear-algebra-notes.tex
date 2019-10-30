@@ -25,8 +25,10 @@
 \usepackage{makecell}
 \usepackage{mathtools}
 \usepackage{cleveref}
+\usepackage{caption}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
+
 
 % language
 \selectlanguage{english}
@@ -202,11 +204,31 @@ To get the row picture, plot all the points that satisfy the equations $2x - y =
 
 \begingroup
 \centering
-\includegraphics[scale = 0.5]{lec01_geometry-of-linear-equations/fig01_2d-row-pic/figure.pdf} \par
+\includegraphics[scale = 0.5]{lec01_geometry-of-linear-equations/fig01_2d-row-pic/figure.pdf}
+\par
 \endgroup
 }
 
+\sectionbox{
+\subsection{Column picture}
+To get the column picture, plot the columns of the coefficient matrix, 
+$\begin{bmatrix*}[r]
+2 & -1 \\ 
+-1 & 2
+\end{bmatrix*}$, for the equations $2x - y = 0$ and $-x + 2y = 3$ and combine them in right amounts to get
+$\begin{bmatrix*}[r]
+0  \\ 
+3
+\end{bmatrix*}$:
 
+\begingroup
+\centering
+\includegraphics[scale = 0.5]{lec01_geometry-of-linear-equations/fig02_2d-col-pic/figure.pdf}
+\par 
+\endgroup
+
+
+}
 % Ende der Spalten
 \end{multicols*}
 
