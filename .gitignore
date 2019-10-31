@@ -8,3 +8,8 @@
 build/
 *.log
 *.pdf
+
+# bakoma-generated files
+*.ddf
+*.bb
+*.Backup*
