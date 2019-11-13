@@ -13,3 +13,6 @@ build/
 *.ddf
 *.bb
 *.Backup*
+
+# geogebra png files
+geogebra.png
