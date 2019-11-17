@@ -30,6 +30,8 @@
 \usepackage{graphicx}
 \graphicspath{{figures/}}
 
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
 
 % language
 \selectlanguage{english}
@@ -499,6 +501,41 @@ Let's answer the two key fundamental questions for this 3-by-3 linear system wit
 \end{tabular}
 }
 
+\sectionbox{
+\subsection{Extending ideas to higher dimensional linear systems}
+The techniques used for visualizing 2D and 3D systems can easily be extended to higher dimensions, but except for the matrix picture, the other two picture types become pretty unintuitive. \\
+
+Additionally, the ideas of what linear combination gives $b$ and what do all the linear combinations give are also generalizable.\\
+
+For example, let's consider the following two scenarios for a linear system with nine equations in nine unknowns and see how the ideas of linear combination can be generalized: 
+
+\textbf{Scenario 1:} All nine columns are linearly independent
+
+% Adapted from the SO answer: https://tex.stackexchange.com/a/12914/180993
+\[
+A
+=
+\begin{bmatrix}
+\vertbar & \vertbar & & \vertbar \\
+a_{1} & a_{2} & \ldots & a_{9} \\
+\vertbar & \vertbar & & \vertbar \\
+\end{bmatrix}
+\]
+In this case, the linear combination of the columns of A will fill the whole 9D space and every 9D vector is reachable. 
+
+\textbf{Scenario 2:} Nineth column ($a_{9}$) is same as the eighth column ($a_{8}$)
+
+\[
+A
+=
+\begin{bmatrix}
+\vertbar & &\vertbar & \vertbar \\
+a_{1} & \ldots & a_{8} & a_{9} \\
+\vertbar &  & \vertbar & \vertbar \\
+\end{bmatrix}
+\]
+In this case, the linear combination of the columns of $A$ will only fill the 8D\ plane (sort of) inside a 9D space and only vectors in the 8D plane are reachable.
+}
 % Ende der Spalten
 \end{multicols*}
 
