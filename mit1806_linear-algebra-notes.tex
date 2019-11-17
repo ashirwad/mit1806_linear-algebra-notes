@@ -536,6 +536,50 @@ a_{1} & \ldots & a_{8} & a_{9} \\
 \]
 In this case, the linear combination of the columns of $A$ will only fill the 8D\ plane (sort of) inside a 9D space and only vectors in the 8D plane are reachable.
 }
+
+\sectionbox{
+\subsection{Matrix times a column vector}
+A matrix when post-multiplied by a column vector produces a column vector. To get the resulting vector just multiply the columns of the matrix by the elements of the multiplying vector and add as shown in the following example:
+\[
+\begin{bmatrix}
+2 & 5 \\
+1 & 3
+\end{bmatrix}
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}
+=
+1 \times
+\begin{bmatrix}
+2 \\
+1
+\end{bmatrix}
++
+2 \times
+\begin{bmatrix}
+5 \\
+3
+\end{bmatrix} \\
+=
+\begin{bmatrix}
+2 \\
+1
+\end{bmatrix}
++
+\begin{bmatrix}
+10\\
+6
+\end{bmatrix}\\
+=
+\begin{bmatrix}
+12 \\
+7
+\end{bmatrix}
+\]
+In other words, a matrix times a column is a linear combination of the columns of the matrix with weights provided by the elements of the multiplying vector.
+}
+
 % Ende der Spalten
 \end{multicols*}
 
