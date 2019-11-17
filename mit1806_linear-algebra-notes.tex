@@ -25,6 +25,7 @@
 \usepackage{makecell}
 \usepackage{mathtools}
 \usepackage{cleveref}
+\usepackage{float}
 \usepackage{capt-of}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
@@ -456,6 +457,47 @@ Notice that changing $b$\ while keeping $A$ the same has changed the column pict
 \endgroup
 }
 
+\sectionbox{
+\subsection{3-by-3 equations with singular $A$}
+Let's modify the 3-by-3 linear system shown in \cref{eqn:lec01-3d} again, but this time change the third column of the coefficient matrix so that it is the sum of the first and the second columns:
+\begin{equation}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+2 & -1 & 1 \\
+-1 & 2 & 1 \\
+0 & -3 & -3 
+\end{bmatrix*}}_{\mathstrut A}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+x \\
+y \\
+z
+\end{bmatrix*}}_{\mathstrut x}
+=
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+0 \\
+-1 \\
+4
+\end{bmatrix*}}_{\mathstrut b}
+\end{equation}
+Now, create the column picture:
+
+\begingroup
+\centering
+\includegraphics[width = 0.8\columnwidth]{lec01_geometry-of-linear-equations/fig07_3d-singular-col-pic/geogebra-derived}
+\par
+\endgroup
+As can be seen in the picture, the three columns of the coefficient matrix lie on the same plane, and consequently all their linear combinations also lie in the same plane. So, this system can be solved only when $b$ is in the plane and for all other cases there is no solution. \\
+
+Let's answer the two key fundamental questions for this 3-by-3 linear system with a singular $A$:
+
+\begin{tabular}{@{}ll@{}} \trule
+\textrm{Question} & \textrm{Answer} \\ \mrule
+\makecell[tl]{What linear combination gives b?} & None \\
+\makecell[tl]{What do all the linear combinations give?} & \makecell[tl]{A 2D plane inside a \\ 3D space}  \\ \brule
+\end{tabular}
+}
 
 % Ende der Spalten
 \end{multicols*}
