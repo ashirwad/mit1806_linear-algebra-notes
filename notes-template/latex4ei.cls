@@ -38,7 +38,7 @@
 \newcommand{\fstitle}[1]{
 	\vspace{-20mm}{
 	\parbox{2.3cm}{
-		\includegraphics[height=1.4cm]{Logo.pdf}
+		\IfFileExists{Logo.pdf}{\includegraphics[height=1.4cm]{Logo.pdf}}{\includegraphics[height=1.4cm]{logo.png}}
 	}
 	\parbox{4cm}{
 		\textbf{\huge{#1}}
