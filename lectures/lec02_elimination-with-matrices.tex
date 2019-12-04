@@ -3,76 +3,123 @@
 
 \begin{document}
 
-\begin{multicols*}{4}
+\onlyinsubfile{\begin{multicols*}{4}}
 
-    \section{Elimination with matrices}
+        \section{Elimination with matrices}
 
-    \sectionboxnew{
-        \subsection{Gauss elimination}
-        Gauss elimination is a systematic way for solving any system of linear equations. The rule simply involves selecting a pivot in each row and cleaning everything below it through row reduction. \\
+        \sectionboxnew{
+            \subsection{Gauss elimination}
+            Gauss elimination is a systematic way for solving any system of linear equations. The rule simply involves selecting a pivot in each row and cleaning everything below it through row reduction. \\
 
-        The elimination generally succeeds normally, but may encounter either of the two other situations besides normal success:
+            The elimination generally succeeds normally, but may encounter either of the two other situations besides normal success:
 
-        \begin{tabular}{@{}ll@{}} \trule
-            \textrm{Situation} & \textrm{Explanation}                                          \\ \mrule
-            Normal success     & \makecell[tl]{Gauss elimination succeeds normally without any \\ row exchanges} \\
-            Temporary failure  & Gauss elimination succeeds with row exchanges                 \\
-            Permanent failure  & Gauss elimination does not succeed                            \\ \brule
-        \end{tabular} \\
+            \begin{tabular}{@{}ll@{}} \trule
+                \textrm{Situation} & \textrm{Explanation}                                          \\ \mrule
+                Normal success     & \makecell[tl]{Gauss elimination succeeds normally without any \\ row exchanges} \\
+                Temporary failure  & Gauss elimination succeeds with row exchanges                 \\
+                Permanent failure  & Gauss elimination does not succeed                            \\ \brule
+            \end{tabular} \\
 
-        The following sections illustrate each of the three situations encountered by Gauss elimination.
-    }
-
-    \sectionboxnew{
-        \subsubsection{Normal success}
-        Let's solve this linear system using Gauss elimination and see it succeed normally:
-        \[
-            \systeme{x + 2y + z = 2, 3x + 8y + z = 12, 4y + z = 2}
-        \]
-        \textbf{Step 1:} Start with marking the first pivot at $(1, 1)$ position in the coefficient matrix $A$ and clean off $(2, 1)$ position
-
-        \begin{gmatrix}[b]
-            \boxed{1} & 2 & 1 \\
-            3 & 8 & 1 \\
-            0 & 4 & 1
-            \rowops
-            \add[-3]{0}{1}
-        \end{gmatrix}
-        \xrightarrow{E_{21}}
-        \begin{gmatrix}[b]
-            \boxed{1} & 2 & 1 \\
-            0 & 2 & -2 \\
-            0 & 4 & 1
-        \end{gmatrix} \\
-
-        \textbf{Step 2:} Since everything below the first pivot is now cleaned, mark the second pivot at $(2, 2)$  and clean off $(3, 2)$
-
-        \begin{gmatrix}[b]
-            \boxed{1} & 2 & 1 \\
-            0 & \boxed{2} & -2 \\
-            0 & 4 & 1
-            \rowops
-            \add[-2]{1}{2}
-        \end{gmatrix}
-        \xrightarrow{E_{32}}
-        \begin{gmatrix}[b]
-            \boxed{1} & 2 & 1 \\
-            0 & \boxed{2} & -2 \\
-            0 & 0 & 5
-        \end{gmatrix} \\
-
-        \textbf{Final step:} Since everything below the second pivot is now clean and there is nothing to clean below the third pivot at $(3, 3)$, just mark it and call it the end
-
-        \begin{gmatrix}[b]
-            \boxed{1} & 2 & 1 \\
-            0 & \boxed{2} & -2 \\
-            0 & 0 & \boxed{5}
-        \end{gmatrix}
-        \right \qquad \text{\parbox{4cm}{
-                \textbf{Fact 1:} This matrix is called an \textit{upper triangular matrix}, usually denoted with \textbf{$U$} \\[0.25cm]
-                \textbf{Fact 2:} The product of the pivots of $U$ gives its \textit{determinant}, so here $det(U) = 10$}
+            The following sections illustrate each of the three situations encountered by Gauss elimination.
         }
-    }
 
-\end{multicols*}
+        \sectionboxnew{
+            \subsubsection{Normal success}
+            Let's solve this linear system using Gauss elimination and see it succeed normally:
+            \[
+                \systeme{x + 2y + z = 2, 3x + 8y + z = 12, 4y + z = 2}
+            \]
+            \textbf{Step 1:} Start with marking the first pivot at $(1, 1)$ position in the coefficient matrix $A$ and clean off $(2, 1)$ position
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                3 & 8 & 1 \\
+                0 & 4 & 1
+                \rowops
+                \add[-3]{0}{1}
+            \end{gmatrix}
+            \xrightarrow{E_{21}}
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & 2 & -2 \\
+                0 & 4 & 1
+            \end{gmatrix} \\
+
+            \textbf{Step 2:} Since everything below the first pivot is now cleaned, mark the second pivot at $(2, 2)$  and clean off $(3, 2)$
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{2} & -2 \\
+                0 & 4 & 1
+                \rowops
+                \add[-2]{1}{2}
+            \end{gmatrix}
+            \xrightarrow{E_{32}}
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{2} & -2 \\
+                0 & 0 & 5
+            \end{gmatrix} \\
+
+            \textbf{Final step:} Since everything below the second pivot is now clean and there is nothing to clean below the third pivot at $(3, 3)$, just mark it and call it the end
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{2} & -2 \\
+                0 & 0 & \boxed{5}
+            \end{gmatrix}
+            \right \qquad \text{\parbox{4cm}{
+                    \textbf{Fact 1:} This matrix is called an \textit{upper triangular matrix}, usually denoted with \textbf{$U$} \\[0.25cm]
+                    \textbf{Fact 2:} The product of the pivots of $U$ gives its \textit{determinant}, so here $det(U) = 10$}
+            }
+        }
+
+        \sectionboxnew{
+            \subsubsection{Temporary failure}
+            Let's solve this linear system using Gauss elimination and see it overcome temporary failure:
+            \[
+                \systeme{x + 2y + z = 2, 3x + 6y + z = 12, 4y + z = 2}
+            \]
+            \textbf{Step 1:} It is same as the \textit{normal success example}
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                3 & 6 & 1 \\
+                0 & 4 & 1
+                \rowops
+                \add[-3]{0}{1}
+            \end{gmatrix}
+            \xrightarrow{E_{21}}
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & 0 & -2 \\
+                0 & 4& 1
+            \end{gmatrix}\\
+
+            \textbf{Step 2:} Similar to the \textit{normal success example}, entries below the first pivot are clean, but now there is an undesirable $0$ at the second pivot position $(2, 2)$. Let's swap it with the row below to get a non-zero entry.
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{0} & -2 \\
+                0 & 4& 1
+                \rowops
+                \swap{1}{2}
+            \end{gmatrix}
+            \xrightarrow{P_{23}}
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{4} & 1 \\
+                0 & 0 & -2
+            \end{gmatrix}\\
+
+            \textbf{Final step:} It is also same as the \textit{normal success example}
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{4} & 1 \\
+                0 & 0 & \boxed{-2}
+            \end{gmatrix}
+        }
+
+        \onlyinsubfile{\end{multicols*}}
 \end{document}
