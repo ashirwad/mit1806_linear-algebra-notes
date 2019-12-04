@@ -1,0 +1,27 @@
+%
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{multicols*}{4}
+
+\section{Elimination with matrices}
+
+\sectionboxnew{
+\subsection{Gauss elimination}
+Gauss elimination is a systematic way for solving any system of linear equations. The rule simply involves selecting a pivot in each row and cleaning everything below it through row reduction. \\
+
+The elimination generally succeeds normally, but may encounter either of the two other situations besides normal success:
+
+\begin{tabular}{@{}ll@{}} \trule
+\textrm{Situation} & \textrm{Explanation} \\ \mrule
+Normal success & \makecell[tl]{Gauss elimination succeeds normally without any \\ row exchanges} \\
+Temporary failure & Gauss elimination succeeds with row exchanges \\
+Permanent failure & Gauss elimination does not succeed \\ \brule 
+\end{tabular} \\
+
+The following sections illustrate each of the three situations encountered by Gauss elimination.
+}
+
+\end{multicols*}
+\end{document}
