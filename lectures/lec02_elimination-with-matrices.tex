@@ -245,5 +245,76 @@
             \end{gmatrix}
         }
 
+        \sectionboxnew{
+            \subsection{Permutation matrices}
+            Permutation matrices ($P$), are a group of square matrices obtained by exchanging either the rows or the columns of an \textit{identity matrix}. In matrix operations, these matrices are used for swapping rows or/and columns of a matrix.
+
+            \begin{tabular}{@{}ll@{}}\trule
+                \textrm{Task} & \textrm{Execution}         \\ \mrule
+                \makecell[tl]{Swap rows,
+                    $\begin{gmatrix}[b]
+                            a & b \\
+                            c & d
+                            \rowops
+                            \swap{0}{1}
+                        \end{gmatrix}$,          \\to get
+                    $\begin{gmatrix}[b]
+                            c & d \\
+                            a &\ b
+                        \end{gmatrix}
+                    $}
+                              &
+                \makecell[tl]{Swap rows,
+                    \begin{gmatrix}[b]
+                        1 & 0 \\
+                        0 & 1
+                        \rowops
+                        \swap{0}{1}
+                    \end{gmatrix}, to get $P$ \\
+                    and pre-multiply:
+                    $\begin{bmatrix}
+                            0 & 1 \\
+                            1 & 0
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            a & b \\
+                            c & d
+                        \end{bmatrix}$
+                }                                          \\ \mrule
+                \makecell[tl]{Swap columns,
+                    $\begin{gmatrix}[b]
+                            a & b \\
+                            c & d
+                            \colops
+                            \swap{0}{1}
+                        \end{gmatrix}$,          \\to get
+                    $\begin{gmatrix}[b]
+                            b & a \\
+                            d &\ c
+                        \end{gmatrix}
+                    $}
+                              &
+                \makecell[tl]{Swap columns,
+                    \begin{gmatrix}[b]
+                        1 & 0 \\
+                        0 & 1
+                        \colops
+                        \swap{0}{1}
+                    \end{gmatrix}, to get $P$ \\
+                    and post-multiply:
+                    $\begin{bmatrix}
+                            a & b \\
+                            c & d
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            0 & 1 \\
+                            1 & 0
+                        \end{bmatrix}$
+                }                                          \\
+                \brule
+            \end{tabular}
+        }
+        }
+
         \onlyinsubfile{\end{multicols*}}
 \end{document}
