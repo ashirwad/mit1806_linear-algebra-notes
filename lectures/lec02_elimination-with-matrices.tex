@@ -121,5 +121,56 @@
             \end{gmatrix}
         }
 
+        \sectionboxnew{
+            \subsection{Permanent failure}
+            Let's solve this linear system using Gauss elimination and see it fail to escape failure:
+            \[
+                \systeme{x + 2y + z = 2, 3x + 8y + z = 12, 4y - 4z = 2}
+            \]
+            \textbf{Step 1:} Same as the \textit{normal success example}
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                3 & 8 & 1 \\
+                0 & 4 & -4
+                \rowops
+                \add[-3]{0}{1}
+            \end{gmatrix}
+            \xrightarrow{E_{21}}
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & 2 & -2 \\
+                0 & 4& -4
+            \end{gmatrix}\\
+
+            \textbf{Step 2:} Same as the \textit{normal success example}
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{2} & -2 \\
+                0 & 4& -4
+                \rowops
+                \add[-2]{1}{2}
+            \end{gmatrix}
+            \xrightarrow{E_{32}}
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{2} & -2 \\
+                0 & 0 & 0
+            \end{gmatrix}\\
+
+            \textbf{Final step:} Entries below the first and the second pivots are all clean, which is good, but there is a \mathbf{0} at the pivot position with no row below to exchange it, so call it the end and declare elimination failure.
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                0 & \boxed{2} & -2 \\
+                0 & 0 & \boxed{\textcolor{red}{0}}
+            \end{gmatrix}\right \qquad
+            \text{\parbox{4cm}{
+                    \textbf{Fact 1:} As noted before, product of pivot elements of $U$ give its  determinant, so here $det(U) = 0$\\[0.25cm]
+                    \textbf{Fact 2:} A square matrix with a 0 determinant value is called \textit{non-invertible} or \textit{singular} matrix}
+            }
+        }
+
         \onlyinsubfile{\end{multicols*}}
 \end{document}
