@@ -217,6 +217,33 @@
             Use back-substitution to obtain $z = -2$, $y = 1$ and $x = 2$ as the solution to equation ...
         }
 
+        \sectionboxnew{
+            \subsection{Elimination matrices}
+            Elimination matrices refer to a set of matrices that are pre-multiplied to the coefficient matrix or the augmented matrix to produce the upper-triangular matrix \bm{U}. \\
+
+            So, the elimination steps shown in the \textit{normal success example} compactly can also be expressed explicitly using elimination matrices:
+
+            $E_{21}$ step:
+
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                3 & 8 & 1 \\
+                0 & 4 & 1
+                \rowops
+                \add[-3]{0}{1}
+            \end{gmatrix}
+            \equiv
+            \begin{bmatrix}
+                1  & 0 & 0 \\
+                -3 & 1 & 0 \\
+                0  & 0 & 1
+            \end{bmatrix}
+            \begin{gmatrix}[b]
+                \boxed{1} & 2 & 1 \\
+                3 & 8 & 1 \\
+                0 & 4 & 1
+            \end{gmatrix}
+        }
 
         \onlyinsubfile{\end{multicols*}}
 \end{document}
