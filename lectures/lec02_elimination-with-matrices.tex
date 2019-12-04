@@ -172,5 +172,51 @@
             }
         }
 
+        \sectionboxnew{
+            \subsection{Back substitution}
+            Back substitution is a technique used for obtaining the solution to the linear system by working bottom-up with the reduced form of the system, $UX = c$, obtained through Gauss elimination. \\
+
+            Create an augmented matrix for equation ... by tacking on the right-hand-side vector onto the coefficient matrix $A$ and repeat the Gauss elimination steps from \textit{normal success example}: \\
+
+            Step 1:
+
+            \begin{gmatrix}[b]
+                1 & 2 & 1 & \BAR & 2 \\
+                3 & 8 & 1 & \BAR & 12 \\
+                0 & 4 & 1 & \BAR & 2
+                \rowops
+                \add[-3]{0}{1}
+            \end{gmatrix}
+            \xrightarrow{E_{21}}
+            \begin{gmatrix}[b]
+                1 & 2 & 1 & \BAR & 2 \\
+                0 & 2 & -2 & \BAR & 6 \\
+                0 & 4 & 1 & \BAR & 2
+            \end{gmatrix}
+
+            Step 2:
+
+            \begin{gmatrix}[b]
+                1 & 2 & 1 & \BAR & 2 \\
+                0 & 2 & -2 & \BAR & 6 \\
+                0 & 4 & 1 & \BAR & 2
+                \rowops
+                \add[-2]{1}{2}
+            \end{gmatrix}
+            \xrightarrow{E_{32}}
+            \begin{gmatrix}[b]
+                1 & 2 & 1 & \BAR & 2 \\
+                0 & 2 & -2 & \BAR & 6 \\
+                0 & 0 & 5 & \BAR & -10
+            \end{gmatrix}
+
+            The system of equation shown in ... can now be rewritten as:
+            \[
+                \systeme{x + 2y + z = 2, 2y - 2z = 6, 5z = -10}
+            \]
+            Use back-substitution to obtain $z = -2$, $y = 1$ and $x = 2$ as the solution to equation ...
+        }
+
+
         \onlyinsubfile{\end{multicols*}}
 \end{document}
