@@ -1,0 +1,44 @@
+%
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\onlyinsubfile{\begin{multicols*}{4}}
+
+\section{Multiplication and inverse matrices}
+
+\sectionboxnew{
+\subsection{Multiplying matrices A and B by rows}
+The third approach of multiplying matrices A and B is to start with a row of matrix A and use its elements to linearly combine the rows of matrix B to obtain the corresponding row of the resulting matrix C.
+\[
+    \renewcommand\arraystretch{1.6}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \vdots                                                     \\
+            % rule definition is adapted from the SO answer: https://tex.stackexchange.com/a/59614/180993
+            \rule[.5ex]{1.5em}{0.4pt}row \ i \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \rule[.5ex]{5em}{0.4pt} \\
+            \rule[.5ex]{5em}{0.4pt} \\
+            \rule[.5ex]{5em}{0.4pt} \\
+            \rule[.5ex]{5em}{0.4pt}
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}
+    =
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \vdots                                                              \\
+            \rule[.5ex]{1.5em}{0.4pt}row \ i \times B \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C}}
+\]
+}
+
+\onlyinsubfile{\end{multicols*}}
+
+\end{document}
