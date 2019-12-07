@@ -8,6 +8,37 @@
 \section{Multiplication and inverse matrices}
 
 \sectionboxnew{
+\subsection{Multiplying matrices A and B by columns}
+The second approach of multiplying matrices A and B is to start with a column of matrix B and use its elements to linearly combine the columns of matrix A to obtain the corresponding column of the resulting matrix C.
+\[
+    \renewcommand\arraystretch{1.6}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            % use of kern and vline is taken from the SO answer: https://tex.stackexchange.com/a/59614/180993
+            \kern.6em\vline & \kern.2em\vline\kern.2em & \vline\kern.6em \\
+            \kern.6em\vline & \kern.2em\vline\kern.2em & \vline\kern.6em \\
+            \kern.6em\vline & \kern.2em\vline\kern.2em & \vline\kern.6em
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \kern.2em\vline\kern.2em &       \\
+            \ldots & col \ j                  & \dots \\
+                   & \kern.2em\vline\kern.2em &
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}
+    =
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \kern.2em\vline\kern.2em &        \\
+            \ldots & A \times col \ j         & \ldots \\
+                   & \kern.2em\vline\kern.2em &        \\
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C}}
+\]
+}
+
+\sectionboxnew{
 \subsection{Multiplying matrices A and B by rows}
 The third approach of multiplying matrices A and B is to start with a row of matrix A and use its elements to linearly combine the rows of matrix B to obtain the corresponding row of the resulting matrix C.
 \[
