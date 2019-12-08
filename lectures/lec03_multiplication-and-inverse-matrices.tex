@@ -70,6 +70,48 @@ The third approach of multiplying matrices A and B is to start with a row of mat
 \]
 }
 
+\sectionboxnew{
+    \subsection{Multiplying matrices A and B by blocks}
+    The fifth approach of multiplying matrices A and B is to cut the matrices into blocks and then multiply block rows of A with block columns of B to get the corresponding blocks of the resulting matrix C.
+
+    \resizebox{\hsize}{!}{
+        \[
+            \renewcommand\arraystretch{1.6}
+            % adapted from the SO answer: https://tex.stackexchange.com/a/230505/180993
+            \sbox0{$\begin{matrix}1 & 0 \\ 0 & 1\end{matrix}$}
+            \underbracket[0pt][0pt]{
+                \left[
+                    \begin{array}{c|c}
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $A_1$} & \makebox[\wd0]{\large $A_2$} \\
+                        \hline
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $A_3$} & \makebox[\wd0]{\large $A_4$}
+                    \end{array}
+                    \right]
+            }_{\mathstrut \underset{m \times n}{A}}
+            \underbracket[0pt][0pt]{
+                \left[
+                    \begin{array}{c|c}
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $B_1$} & \makebox[\wd0]{\large $B_2$} \\
+                        \hline
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $B_3$} & \makebox[\wd0]{\large $B_4$}
+                    \end{array}
+                    \right]
+            }_{\mathstrut \underset{n \times p}{B}}
+            =
+            \underbracket[0pt][0pt]{
+                \left[
+                    \begin{array}{c|c}
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $C_1$} & \makebox[\wd0]{\large $C_2$} \\
+                        \hline
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $C_3$} & \makebox[\wd0]{\large $C_4$}
+                    \end{array}
+                    \right]
+            }_{\mathstrut \underset{m \times p}{C}}
+        \]
+    }
+    The first block, $C_1$, is the dot product of the first block row of matrix A and the first block column of matrix B, i.e.,  $A_1\times B_1 + A_2 \times B_3$, and other blocks are obtained similarly.
+}
+
 \onlyinsubfile{\end{multicols*}}
 
 \end{document}
