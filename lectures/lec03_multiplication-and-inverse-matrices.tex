@@ -71,6 +71,125 @@ The third approach of multiplying matrices A and B is to start with a row of mat
 }
 
 \sectionboxnew{
+\subsection{Multiplying matrices A and B by column times row}
+The fourth approach of multiplying matrices A and B is to generate a bunch of matrices by multiplying the columns of matrix A with the corresponding rows of matrix B and then add them together.
+\[
+    \renewcommand\arraystretch{1.6}
+    \equalto{
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \kern.6em\vline &        & \kern.2em\vline\kern.2em &        & \kern.6em\vline \\
+            col \ 1         & \ldots & col \ i                  & \ldots & col \ n         \\
+            \kern.6em\vline &        & \kern.2em\vline\kern.2em &        & \kern.6em\vline
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \rule[.5ex]{1.5em}{0.4pt}row \ 1 \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots                                                     \\
+            \rule[.5ex]{1.5em}{0.4pt}row \ j \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots                                                     \\
+            \rule[.5ex]{1.5em}{0.4pt}row \ n \rule[.5ex]{1.5em}{0.4pt}
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}}
+    {
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C_1}}
+    +
+    \ldots
+    +
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C_i}}
+    +
+    \ldots
+    +
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C_n}}}
+\]
+Let's illustrate this matrix multiplication approach with the following example:
+\begin{align*}
+    \begin{bmatrix}
+        2 & 7 \\
+        3 & 8 \\
+        4 & 9
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 6 \\
+        0 & 0
+    \end{bmatrix}
+     & =
+    \begin{bmatrix}
+        2 \\
+        3 \\
+        4
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 6
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        7 \\
+        8 \\
+        9
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & 0
+    \end{bmatrix} \\
+     & =
+    \begin{bmatrix}
+        2 \times 1 & 2 \times 6 \\
+        3 \times 1 & 3 \times 6 \\
+        4 \times 1 & 4 \times 6
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        7 \times 0 & 7 \times 0 \\
+        8 \times 0 & 8 \times 0 \\
+        9 \times 0 & 9 \times 0
+    \end{bmatrix} \\
+     & =
+    \begin{bmatrix}
+        2 & 12 \\
+        3 & 18 \\
+        4 & 24
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        0 & 0 \\
+        0 & 0 \\
+        0 & 0
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        2 & 12 \\
+        3 & 18 \\
+        4 & 24
+    \end{bmatrix}
+\end{align*}
+The resulting matrix \begin{bsmallmatrix} 2 & 12 \\ 3 & 18 \\ 4 & 24 \end{bsmallmatrix}  is a special matrix, where:
+\begin{itemize}
+    \item all of the rows lie on the line through the vector \begin{bsmallmatrix} 1 \\ 6 \end{bsmallmatrix}, and
+    \item  all of the columns lie on the line through the vector \begin{bsmallmatrix} 2 \\ 3 \\ 4 \end{bsmallmatrix}
+\end{itemize}
+In other words, the row space and the column space of this matrix is a line.
+}
+
+\sectionboxnew{
     \subsection{Multiplying matrices A and B by blocks}
     The fifth approach of multiplying matrices A and B is to cut the matrices into blocks and then multiply block rows of A with block columns of B to get the corresponding blocks of the resulting matrix C.
 
