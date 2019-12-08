@@ -8,6 +8,40 @@
 \section{Multiplication and inverse matrices}
 
 \sectionboxnew{
+\subsection{Multiplying matrices A and B by row times column}
+The first approach to multiplying matrices A and B is to start with a row of matrix A and take its dot product with the corresponding column of matrix B to get a matrix entry of the resulting matrix C.
+\resizebox{\hsize}{!}{
+\[
+    \renewcommand\arraystretch{1.6}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \vdots &        &        \\
+            a_{31} & a_{32} & \ldots & a_{3n} \\
+                   & \vdots &        &
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & b_{14} &        \\
+            \ldots & b_{24} & \ldots \\
+                   & \vdots &        \\
+                   & b_{n4} &
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}
+    =
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \vdots &        \\
+            \ldots & c_{34} & \ldots \\
+                   & \vdots &
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C}}
+\]
+}
+In the illustration, the $c_{34}$ element, i.e., the element located at row 3 and column 4 of matrix C  is obtained by taking the dot product of the 3rd row of matrix A with the 4th column of matrix B, i.e., $\sum_{k=1}^{n} a_{3 k} b_{k 4}$.
+}
+
+\sectionboxnew{
 \subsection{Multiplying matrices A and B by columns}
 The second approach of multiplying matrices A and B is to start with a column of matrix B and use its elements to linearly combine the columns of matrix A to obtain the corresponding column of the resulting matrix C.
 \[
@@ -122,6 +156,8 @@ The fourth approach of multiplying matrices A and B is to generate a bunch of ma
     }_{\mathstrut \underset{m \times p}{C_n}}}
 \]
 Let's illustrate this matrix multiplication approach with the following example:
+\begingroup
+\allowdisplaybreaks
 \begin{align*}
     \begin{bmatrix}
         2 & 7 \\
@@ -181,10 +217,11 @@ Let's illustrate this matrix multiplication approach with the following example:
         4 & 24
     \end{bmatrix}
 \end{align*}
-The resulting matrix \begin{bsmallmatrix} 2 & 12 \\ 3 & 18 \\ 4 & 24 \end{bsmallmatrix}  is a special matrix, where:
+\endgroup
+The resulting matrix $\begin{bsmallmatrix} 2 & 12 \\ 3 & 18 \\ 4 & 24 \end{bsmallmatrix}$  is a special matrix, where:
 \begin{itemize}
-    \item all of the rows lie on the line through the vector \begin{bsmallmatrix} 1 \\ 6 \end{bsmallmatrix}, and
-    \item  all of the columns lie on the line through the vector \begin{bsmallmatrix} 2 \\ 3 \\ 4 \end{bsmallmatrix}
+    \item all of the rows lie on the line through the vector $\begin{bsmallmatrix} 1 \\ 6 \end{bsmallmatrix}$, and
+    \item  all of the columns lie on the line through the vector $\begin{bsmallmatrix} 2 \\ 3 \\ 4 \end{bsmallmatrix}$
 \end{itemize}
 In other words, the row space and the column space of this matrix is a line.
 }
@@ -194,7 +231,7 @@ In other words, the row space and the column space of this matrix is a line.
     The fifth approach of multiplying matrices A and B is to cut the matrices into blocks and then multiply block rows of A with block columns of B to get the corresponding blocks of the resulting matrix C.
 
     \resizebox{\hsize}{!}{
-        \[
+        $
             \renewcommand\arraystretch{1.6}
             % adapted from the SO answer: https://tex.stackexchange.com/a/230505/180993
             \sbox0{$\begin{matrix}1 & 0 \\ 0 & 1\end{matrix}$}
@@ -226,7 +263,7 @@ In other words, the row space and the column space of this matrix is a line.
                     \end{array}
                     \right]
             }_{\mathstrut \underset{m \times p}{C}}
-        \]
+        $
     }
     The first block, $C_1$, is the dot product of the first block row of matrix A and the first block column of matrix B, i.e.,  $A_1\times B_1 + A_2 \times B_3$, and other blocks are obtained similarly.
 }
