@@ -34,6 +34,112 @@ Comparing the two different expressions for $(AA^{-1})^T$, we get the following:
 So, if we know the inverse of $A$, we can take its transpose to get the inverse of $A^{T}$.
 }
 
+\sectionboxnew{
+\subsection{A equals LU factorization for 2-by-2 equations}
+Recall that the  goal of Gaussian elimination is to transform the coefficient matrix $A$ into an upper-triangular matrix $U$ by pre-multiplying a series of elimination matrices. \\
+
+Let's consider the following $2 \times 2$ coefficient matrix and its elimination matrix:
+\[
+A
+=
+\begin{bmatrix*}[r]
+2 & 1 \\
+8 & 7
+\end{bmatrix*};
+E_{21}
+=
+\begin{bmatrix*}[r]
+1 & 0 \\
+-4 & 1
+\end{bmatrix*}
+\]
+Now, let's multiply $A$ and $E_{21}$ matrices to get the upper-triangular matrix $U$:
+\[
+\begin{bmatrix*}[r]
+1 & 0 \\
+-4 & 1
+\end{bmatrix*}
+\begin{bmatrix*}[r]
+2 & 1 \\
+8 & 7
+\end{bmatrix*}
+=
+\begin{bmatrix*}
+2 & 1 \\
+0 & 3
+\end{bmatrix*}
+\]
+Subsequently, multiply both sides by $E_{21}^{-1}$ to get the $A = LU$ factorization:
+\[
+\begin{bmatrix*}[r]
+1 & 0 \\
+-4 & 1
+\end{bmatrix*}^{-1}
+\begin{bmatrix*}[r]
+1 & 0 \\
+-4 & 1
+\end{bmatrix*}
+\begin{bmatrix*}[r]
+2 & 1 \\
+8 & 7
+\end{bmatrix*}
+=
+\begin{bmatrix*}[r]
+1 & 0 \\
+-4 & 1
+\end{bmatrix*}^{-1}
+\begin{bmatrix*}[r]
+2 & 1 \\
+0 & 3
+\end{bmatrix*}
+\]
+The multiplication $E_{21}$ and $E_{21}^{-1}$results in an identity matrix ($I$) and the subsequent multiplication of $I$ with $A$ leaves $A$ unchanged and results in the following equation:
+\[
+\begin{aligned}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+2 & 1 \\
+8 & 7
+\end{bmatrix*}
+}_{\mathstrut A}
+&=
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & 0 \\
+4 & 1
+\end{bmatrix*}
+}_{\mathstrut L}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+2 & 1 \\
+0 & 3
+\end{bmatrix*}
+}_{\mathstrut U}
+\text{or} \\
+&
+=
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & 0 \\
+4 & 1
+\end{bmatrix*}
+}_{\mathstrut L}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+2 & 0 \\ 
+0 & 3
+\end{bmatrix*}
+}_{\mathstrut D}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & \frac{1}{2} \\
+0 & 1
+\end{bmatrix*}
+}_{\mathstrut U}
+\end{aligned}
+\]
+}
+
 
 \onlyinsubfile{\end{multicols*}}
 
