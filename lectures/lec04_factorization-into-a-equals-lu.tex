@@ -238,6 +238,85 @@ A &= (E_{32}E_{31}E_{21})^{-1}U \\
 Notice that when no row exchanges are performed, multipliers go directly into $L$.
 }
 
+\sectionboxnew{
+\subsection{Permutation matrices}
+Recall that permutation matrices are square matrices that are obtained by exchanging rows of an identity matrix. These matrices are typically used in Gaussian elimination to perform row exchanges when there is a zero at the pivot position and a non-zero element below it. \\
+
+For a $3 \times 3$ identity matrix, the following $6(3!)$ permutation matrices can be obtained by exchanging its rows:
+\[
+\begin{gathered}
+P_{12}
+=
+\begin{bmatrix}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 1
+\end{bmatrix};
+P_{13}
+=
+\begin{bmatrix}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0 
+\end{bmatrix};
+P_{23}
+=
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 1 & 0 
+\end{bmatrix}; \\
+P_{231}
+=
+\begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & 0 & 0 
+\end{bmatrix};
+P_{312}
+=
+\begin{bmatrix}
+0 & 0 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0 
+\end{bmatrix};
+I
+=
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 
+\end{bmatrix}
+\end{gathered}
+\]
+The notation used for denoting permutation matrices has the following meaning:
+\begin{itemize}
+\item $P_{12}$ denotes a permutation matrix that when pre-multiplied to a matrix $A$ will exchange its rows 1 and 2
+\item $P_{231}$ denotes a permutation matrix that when pre-multiplied to a matrix $A$ will rearrange its rows in the following manner: row 2 becomes row 1, row 3 becomes row 2, and row 1 becomes row 3
+\item $I$ denotes the identity matrix, a special type of permutation matrix that does nothing
+\end{itemize}
+Permutation matrices also have the following two important properties:
+\begin{enumerate}[label = Property \arabic*., itemindent = *]
+\item Inverses are the transposes for permutation matrices, i.e., $P^{T} = P^{-1}$. In other words, to find the inverse of a permutation matrix, just take its transpose.
+\item Multiplying any two permutation matrices in the group results in another permutation matrix that belongs to the same group.
+\end{enumerate}
+Similar to exchanging rows, columns of a matrix $A$ can also be exchanged by exchanging the corresponding columns of the identity matrix and post-multiplying it to $A$. 
+\[
+\begin{bmatrix}
+a & b \\
+c & d 
+\end{bmatrix}
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+=
+\begin{bmatrix}
+b & a \\
+d & c
+\end{bmatrix}
+\]
+}
 
 \onlyinsubfile{\end{multicols*}}
 
