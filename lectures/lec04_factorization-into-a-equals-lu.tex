@@ -140,6 +140,104 @@ The multiplication $E_{21}$ and $E_{21}^{-1}$results in an identity matrix ($I$)
 \]
 }
 
+\sectionboxnew{
+\subsection{A equals LU factorization for 3-by-3 equations}
+Let's consider the $3 \times 3$ coefficient matrix $A$ and its elimination matrices:
+\[
+\begin{gathered}
+A
+=
+\begin{bmatrix*}[r]
+1 & 0 & 1 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix*};
+E_{21}
+=
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+-2 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix*};
+E_{31}
+=
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix*} \\
+E_{32}
+=
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & -5 & 
+\end{bmatrix*}
+\text{\makecell[tl]{\textbf{Note:} $E_{31}$ is an identity matrix and \\ will be omitted from here on}}
+\end{gathered}
+\]
+The multiplication of the elimination matrices, $E_{32}$, $E_{31}$ and $E_{21}$, gives an overall elimination matrix $E$ that sits on the left of $A$:
+\[
+\underbrace{E_{32}E_{31}E_{21}}_{E}A = U \text{ (no row exchanges)}
+\]
+\[
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & -5 & 1
+\end{bmatrix*}
+}_{\mathstrut E_{32}}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+-2 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix*}
+}_{\mathstrut E_{21}}
+=
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+-2 & 1 & 0 \\
+10 & -5 & 1
+\end{bmatrix*}
+}_{\mathstrut E}
+\]
+The lower-triangular matrix $L$ that sits on the left of  upper-triangular matrix $U$ is obtained as follows:
+\[
+\begin{aligned}
+A &= (E_{32}E_{31}E_{21})^{-1}U \\
+  &= \underbrace{E_{21}^{-1}E_{31}^{-1}E_{32}^{-1}}_{L}U
+\end{aligned}
+\]
+\[
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix*}
+}_{\mathstrut E_{21}^{-1}}
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}[r]
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 5 & 1
+\end{bmatrix*}
+}_{\mathstrut E_{32}^{-1}}
+=
+\underbracket[0pt][0pt]{
+\begin{bmatrix*}
+1 & 0 & 0 \\
+2 & 1 & 0 \\
+0 & 5 & 1
+\end{bmatrix*}
+}_{\mathstrut L}
+\]
+Notice that when no row exchanges are performed, multipliers go directly into $L$.
+}
+
 
 \onlyinsubfile{\end{multicols*}}
 
