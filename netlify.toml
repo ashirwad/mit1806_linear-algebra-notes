@@ -1,0 +1,2 @@
+[build]
+command = "bash build.sh main.tex"
