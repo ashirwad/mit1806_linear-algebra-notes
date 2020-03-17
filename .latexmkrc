@@ -17,3 +17,6 @@ $pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %O %S
 # (b) supports forward and inverse search, and (c) allows continuous update in 
 # preview mode.
 $pdf_previewer = 'start "c:/Program Files/SumatraPDF/SumatraPDF.exe" %O %S';
+
+# Add latex4ei files to search paths
+ensure_path('TEXINPUTS', './latex4ei//');
