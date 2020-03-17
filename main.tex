@@ -1,38 +1,46 @@
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-% LaTeX Cheat Sheet von LaTeX4EI                                                                        
-%
-% @encode:      UTF-8, tabwidth = 4, newline = LF
-% @author:      Emanuel Regnath
-% @date:                
-%
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-
-
-%---------------------------------------%
-%                       P R E A M B L E                         %
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
 % arara: indent: {overwrite: yes, silent: yes}
-\PassOptionsToPackage{english}{babel}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% MIT 18.06 Linear Algebra Notes
+%
+% Author: Ashirwad Barnwal
+% Contact: ashirwad1992@gmail.com
+% Encode: UTF-8, tabwidth = 4, newline = LF
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-% Document Class ===============================================================
-\documentclass[fs, footer]{latex4ei}
 
-\usepackage{cprotect}
-\usepackage{hyperref}
-\usepackage{scientific}
+% ======================================================================
+% Document Settings
+% ======================================================================
+
+% possible options: color/nocolor, english/german, threecolumn
+% defaults: color, english
+\documentclass[english]{latex4ei/latex4ei_sheet}
+
+% set document information
+\title{MIT 18.06 Notes}
+\author{Ashirwad Barwal}					% optional, delete if unchanged
+\myemail{ashirwad1992@gmail.com}			% optional, delete if unchanged
+\mywebsite{https://ashirwad.netlify.com/}			% optional, delete if unchanged
+
 
 % My packages
+\usepackage{gauss}
 \usepackage{makecell}
 \usepackage{mathtools}
-\usepackage{cleveref}
-\usepackage{float}
-\usepackage{capt-of}
 \usepackage{systeme}
+\usepackage{enumitem}
 \usepackage{graphicx}
-\graphicspath{
-{figures/lec01_geometry-of-linear-equations/}
-{../figures/lec01_geometry-of-linear-equations/}
+\usepackage{subfiles}
+
+\newcommand{\BAR}{%
+  \hspace{-\arraycolsep}%
+  \strut\vrule % the `\vrule` is as high and deep as a strut
+  \hspace{-\arraycolsep}%
 }
+
+% Taken from the SO answer: https://tex.stackexchange.com/a/100553/180993
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
 
 % Taken from the SO answer: https://tex.stackexchange.com/a/12914/180993
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
@@ -47,104 +55,19 @@
     \setlength\belowdisplayshortskip{3pt}
 }
 
-% language
-\selectlanguage{english}
 
-%colors
-\colorlet{sectioncolor}{tum_blue_dark2}
-
-% Idee: eigene farbe {blue_dark1}, Zuweisungsfarbe {col:section} oder {col:table}
-% Für \code in sectionbox: neue sectionbox als umgebung mit minipage
-
-\usepackage{subfiles}
-% Source Code Listings =========================================================
-\usepackage{listings}
-\definecolor{listinggray}{gray}{0.9}
-\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
-\lstset{
-    backgroundcolor=\color{lbcolor},
-    basicstyle=\tt,
-    tabsize=2,
-    language={[LaTeX]TeX},
-    %upquote=true,
-    aboveskip={0.4\baselineskip},
-    belowskip={0.4\baselineskip},
-    abovecaptionskip={\baselineskip},
-    belowcaptionskip={0\baselineskip},
-    columns=fixed,
-    showstringspaces=false,
-    extendedchars=true,
-    linewidth=6.7cm,
-    xleftmargin={3pt},
-    %framexleftmargin={10pt},
-    framexrightmargin={2pt},
-    %framextopmargin={9pt},
-    %framexbottommargin={9pt},
-    %breaklines=true,
-    prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
-    frame=single,
-    showtabs=false,
-    showspaces=false,
-    showstringspaces=false,
-    identifierstyle=\ttfamily,
-    %tagstyle=\bf,
-    keywordstyle=\color{tum_blue_dark},
-    commentstyle=\color[rgb]{0.133,0.545,0.133},
-    stringstyle=\color[rgb]{0.8,  0.1,  0.1},
-}
-
-\let\myverb\lstinline
-\let\code\lstinline
-%\renewcommand{\code}[1]{\lstinline?#1?}
-
-\usepackage{fancyvrb} 
-\usepackage{verbdef} 
-\DefineShortVerb{\#}
-
-
-
-\fancyfoot[R]{Created \today \ at \thistime \qquad \thepage}
-\fancyfoot[L]{Homepage: \href{www.latex4ei.de}{www.latex4ei.de} -- please report misstakes \emph{immediately}.}
-\fancyfoot[C]{by Emanuel Regnath, contact \emph{\href{mailto:emanuel.regnath@tum.de}{emanuel.regnath@tum.de}}}
-
-
-% Define BibTeX command
-%\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-
-
-%Hyperref
-\hypersetup{
-        pdfcreator={LaTeX2e},
-        pdfborder=0 0 0,
-        breaklinks=true,
-        bookmarksopen=true,
-        bookmarksnumbered=true,
-        linkcolor=tum_blue_dark,
-        urlcolor=tum_blue_dark,
-        citecolor=tum_blue_dark,
-        colorlinks=true
-}
-
-
-% make boxes robust for verbatim
-\let\oldsectionbox\sectionbox
-\outer\def\sectionbox{\icprotect\oldsectionbox}
-
-
-%---------------------------------------%
-%                       LaTeX Cheat Sheet                       %
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%
-
-% DOCUMENT_BEGIN ===============================================================
+% ======================================================================
+% Begin
+% ======================================================================
 \begin{document}
 
-% TITLE ========================================================================
-\fstitle{MIT 18.06 Notes \\[0.3em] {\normalfont \small Notes from Dr. Strang's course on linear algebra}}
-
 \subfile{lectures/lec01_geometry-of-linear-equations}
+% \subfile{lectures/lec02_elimination-with-matrices}
+% \subfile{lectures/lec03_multiplication-and-inverse-matrices}
+% \subfile{lectures/lec04_factorization-into-a-equals-lu}
 
-% Dokumentende
+
+% ======================================================================
+% End
 % ======================================================================
 \end{document}
-
-
