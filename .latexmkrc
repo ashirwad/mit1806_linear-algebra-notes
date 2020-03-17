@@ -11,7 +11,7 @@ $pdf_mode = 1;
 # -synctex=1:
 # -interaction=nonstopmode:
 # -file-line-error: 
-$pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %O %S';
+$pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %O --shell-escape %S';
 
 # Use sumatra pdf reader for viewing pdf outputs because (a) it's open-source,
 # (b) supports forward and inverse search, and (c) allows continuous update in 
