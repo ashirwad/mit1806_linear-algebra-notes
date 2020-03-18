@@ -7,7 +7,7 @@
 
 \section{Factorization into A equals LU}
 
-\sectionboxnew{
+
 \subsection{Rules of inverses and transposes}
 Transpose of a matrix $A$, generally denoted as $A^{T}$, is a matrix obtained by exchanging the rows and columns of matrix $A$. So, a matrix element at $(i, j)$ position in $A$ gets moved to $(j, i)$ position in $A^{T}$. \\
 
@@ -32,9 +32,9 @@ Comparing the two different expressions for $(AA^{-1})^T$, we get the following:
 \]
 \\
 So, if we know the inverse of $A$, we can take its transpose to get the inverse of $A^{T}$.
-}
 
-\sectionboxnew{
+
+
 \subsection{A equals LU factorization for 2-by-2 equations}
 Recall that the  goal of Gaussian elimination is to transform the coefficient matrix $A$ into an upper-triangular matrix $U$ by pre-multiplying a series of elimination matrices. \\
 
@@ -138,9 +138,9 @@ The multiplication $E_{21}$ and $E_{21}^{-1}$results in an identity matrix ($I$)
         }_{\mathstrut U}
     \end{aligned}
 \]
-}
 
-\sectionboxnew{
+
+
 \subsection{A equals LU factorization for 3-by-3 equations}
 Let's consider the $3 \times 3$ coefficient matrix $A$ and its elimination matrices:
 \[
@@ -236,9 +236,9 @@ The lower-triangular matrix $L$ that sits on the left of  upper-triangular matri
     }_{\mathstrut L}
 \]
 Notice that when no row exchanges are performed, multipliers go directly into $L$.
-}
 
-\sectionboxnew{
+
+
     \subsection{Gaussian elimination cost}
     Solving a system of linear equations using Gaussian elimination is computationally expensive. Let's see how many operations are needed on an $n \times n$ matrix $A$ to perform elimination, i.e., to go from $A$ to $U$. \\
 
@@ -247,9 +247,9 @@ Notice that when no row exchanges are performed, multipliers go directly into $L
         n^2 + (n - 1)^2 + \ldots + 3^2 + 2^2 + 1^2 \approx \frac{n^3}{3}
     \]
     Similarly, the cost of fixing the right-hand side vector $b$ is $n^2$. So, we pay a higher price to split $A$ into $LU$.
-}
 
-\sectionboxnew{
+
+
     \subsection{Permutation matrices}
     Recall that permutation matrices are square matrices that are obtained by exchanging rows of an identity matrix. These matrices are typically used in Gaussian elimination to perform row exchanges when there is a zero at the pivot position and a non-zero element below it. \\
 
@@ -327,7 +327,7 @@ Notice that when no row exchanges are performed, multipliers go directly into $L
             d & c
         \end{bmatrix}
     \]
-}
+
 
 \onlyinsubfile{\end{multicols*}}
 

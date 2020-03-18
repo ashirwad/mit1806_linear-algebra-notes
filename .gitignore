@@ -8,6 +8,7 @@
 build/
 *.log
 *.pdf
+!figures/**/*.pdf
 
 # bakoma-generated files
 *.ddf
