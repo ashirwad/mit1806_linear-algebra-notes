@@ -1,0 +1,74 @@
+% arara: latexmk: {options: [-pv]}
+% arara: indent: {overwrite: yes, silent: yes, cruft: build}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+% MIT 18.06 Linear Algebra Notes
+%
+% Author: Ashirwad Barnwal
+% Contact: ashirwad1992@gmail.com
+% Encode: UTF-8, tabwidth = 4, newline = LF
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+% ======================================================================
+% Document Settings
+% ======================================================================
+
+% possible options: color/nocolor, english/german, threecolumn
+% defaults: color, english
+\documentclass[english]{latex4ei_sheet}
+
+% set document information
+\title{MIT 18.06 Notes}
+\author{Ashirwad Barwal}					% optional, delete if unchanged
+\myemail{ashirwad1992@gmail.com}			% optional, delete if unchanged
+\mywebsite{https://ashirwad.netlify.com/}			% optional, delete if unchanged
+
+
+% My packages
+\usepackage{gauss}
+\usepackage{makecell}
+\usepackage{mathtools}
+\usepackage{systeme}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{subfiles}
+
+\newcommand{\BAR}{%
+  \hspace{-\arraycolsep}%
+  \strut\vrule % the `\vrule` is as high and deep as a strut
+  \hspace{-\arraycolsep}%
+}
+
+% Taken from the SO answer: https://tex.stackexchange.com/a/100553/180993
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
+
+% Taken from the SO answer: https://tex.stackexchange.com/a/12914/180993
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+
+% Taken from the SO answer: https://tex.stackexchange.com/a/69665/180993
+\expandafter\def\expandafter\normalsize\expandafter{%
+    \normalsize
+    \setlength\abovedisplayskip{3pt}
+    \setlength\belowdisplayskip{3pt}
+    \setlength\abovedisplayshortskip{3pt}
+    \setlength\belowdisplayshortskip{3pt}
+}
+
+
+% ======================================================================
+% Begin
+% ======================================================================
+\begin{document}
+
+\subfile{lectures/lec01_geometry-of-linear-equations}
+% \subfile{lectures/lec02_elimination-with-matrices}
+% \subfile{lectures/lec03_multiplication-and-inverse-matrices}
+% \subfile{lectures/lec04_factorization-into-a-equals-lu}
+
+
+% ======================================================================
+% End
+% ======================================================================
+\end{document}

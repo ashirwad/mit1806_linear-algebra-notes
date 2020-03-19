@@ -1,0 +1,19 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# arara-generated files
+build/
+*.log
+*.pdf
+!figures/**/*.pdf
+
+# bakoma-generated files
+*.ddf
+*.bb
+*.Backup*
+
+# geogebra png files
+geogebra.png

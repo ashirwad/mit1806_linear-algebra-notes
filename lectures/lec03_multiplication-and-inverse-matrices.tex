@@ -1,0 +1,411 @@
+%
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\onlyinsubfile{\begin{multicols*}{4}}
+
+\section{Multiplication and inverse matrices}
+
+\sectionboxnew{
+\subsection{Multiplying matrices A and B by row times column}
+The first approach to multiplying matrices A and B is to start with a row of matrix A and take its dot product with the corresponding column of matrix B to get a matrix entry of the resulting matrix C.
+\resizebox{\hsize}{!}{
+\[
+    \renewcommand\arraystretch{1.6}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \vdots &        &        \\
+            a_{31} & a_{32} & \ldots & a_{3n} \\
+                   & \vdots &        &
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & b_{14} &        \\
+            \ldots & b_{24} & \ldots \\
+                   & \vdots &        \\
+                   & b_{n4} &
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}
+    =
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \vdots &        \\
+            \ldots & c_{34} & \ldots \\
+                   & \vdots &
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C}}
+\]
+}
+In the illustration, the $c_{34}$ element, i.e., the element located at row 3 and column 4 of matrix C  is obtained by taking the dot product of the 3rd row of matrix A with the 4th column of matrix B, i.e., $\sum_{k=1}^{n} a_{3 k} b_{k 4}$.
+}
+
+\sectionboxnew{
+\subsection{Multiplying matrices A and B by columns}
+The second approach of multiplying matrices A and B is to start with a column of matrix B and use its elements to linearly combine the columns of matrix A to obtain the corresponding column of the resulting matrix C.
+\[
+    \renewcommand\arraystretch{1.6}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            % use of kern and vline is taken from the SO answer: https://tex.stackexchange.com/a/59614/180993
+            \kern.6em\vline & \kern.2em\vline\kern.2em & \vline\kern.6em \\
+            \kern.6em\vline & \kern.2em\vline\kern.2em & \vline\kern.6em \\
+            \kern.6em\vline & \kern.2em\vline\kern.2em & \vline\kern.6em
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \kern.2em\vline\kern.2em &       \\
+            \ldots & col \ j                  & \dots \\
+                   & \kern.2em\vline\kern.2em &
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}
+    =
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+                   & \kern.2em\vline\kern.2em &        \\
+            \ldots & A \times col \ j         & \ldots \\
+                   & \kern.2em\vline\kern.2em &        \\
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C}}
+\]
+}
+
+\sectionboxnew{
+\subsection{Multiplying matrices A and B by rows}
+The third approach of multiplying matrices A and B is to start with a row of matrix A and use its elements to linearly combine the rows of matrix B to obtain the corresponding row of the resulting matrix C.
+\[
+    \renewcommand\arraystretch{1.6}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \vdots                                                     \\
+            % rule definition is adapted from the SO answer: https://tex.stackexchange.com/a/59614/180993
+            \rule[.5ex]{1.5em}{0.4pt}row \ i \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \rule[.5ex]{5em}{0.4pt} \\
+            \rule[.5ex]{5em}{0.4pt} \\
+            \rule[.5ex]{5em}{0.4pt} \\
+            \rule[.5ex]{5em}{0.4pt}
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}
+    =
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \vdots                                                              \\
+            \rule[.5ex]{1.5em}{0.4pt}row \ i \times B \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C}}
+\]
+}
+
+\sectionboxnew{
+\subsection{Multiplying matrices A and B by column times row}
+The fourth approach of multiplying matrices A and B is to generate a bunch of matrices by multiplying the columns of matrix A with the corresponding rows of matrix B and then add them together.
+\[
+    \renewcommand\arraystretch{1.6}
+    \equalto{
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \kern.6em\vline &        & \kern.2em\vline\kern.2em &        & \kern.6em\vline \\
+            col \ 1         & \ldots & col \ i                  & \ldots & col \ n         \\
+            \kern.6em\vline &        & \kern.2em\vline\kern.2em &        & \kern.6em\vline
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times n}{A}}
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \rule[.5ex]{1.5em}{0.4pt}row \ 1 \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots                                                     \\
+            \rule[.5ex]{1.5em}{0.4pt}row \ j \rule[.5ex]{1.5em}{0.4pt} \\
+            \vdots                                                     \\
+            \rule[.5ex]{1.5em}{0.4pt}row \ n \rule[.5ex]{1.5em}{0.4pt}
+        \end{bmatrix}
+    }_{\mathstrut \underset{n \times p}{B}}}
+    {
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C_1}}
+    +
+    \ldots
+    +
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C_i}}
+    +
+    \ldots
+    +
+    \underbracket[0pt][0pt]{
+        \begin{bmatrix}
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar \\
+            \horzbar & \horzbar & \horzbar
+        \end{bmatrix}
+    }_{\mathstrut \underset{m \times p}{C_n}}}
+\]
+Let's illustrate this matrix multiplication approach with the following example:
+\begingroup
+\allowdisplaybreaks
+\begin{align*}
+    \begin{bmatrix}
+        2 & 7 \\
+        3 & 8 \\
+        4 & 9
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 6 \\
+        0 & 0
+    \end{bmatrix}
+     & =
+    \begin{bmatrix}
+        2 \\
+        3 \\
+        4
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 6
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        7 \\
+        8 \\
+        9
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & 0
+    \end{bmatrix} \\
+     & =
+    \begin{bmatrix}
+        2 \times 1 & 2 \times 6 \\
+        3 \times 1 & 3 \times 6 \\
+        4 \times 1 & 4 \times 6
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        7 \times 0 & 7 \times 0 \\
+        8 \times 0 & 8 \times 0 \\
+        9 \times 0 & 9 \times 0
+    \end{bmatrix} \\
+     & =
+    \begin{bmatrix}
+        2 & 12 \\
+        3 & 18 \\
+        4 & 24
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        0 & 0 \\
+        0 & 0 \\
+        0 & 0
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        2 & 12 \\
+        3 & 18 \\
+        4 & 24
+    \end{bmatrix}
+\end{align*}
+\endgroup
+The resulting matrix $\begin{bsmallmatrix} 2 & 12 \\ 3 & 18 \\ 4 & 24 \end{bsmallmatrix}$  is a special matrix, where:
+\begin{itemize}
+    \item all of the rows lie on the line through the vector $\begin{bsmallmatrix} 1 \\ 6 \end{bsmallmatrix}$, and
+    \item  all of the columns lie on the line through the vector $\begin{bsmallmatrix} 2 \\ 3 \\ 4 \end{bsmallmatrix}$
+\end{itemize}
+In other words, the row space and the column space of this matrix is a line.
+}
+
+\sectionboxnew{
+    \subsection{Multiplying matrices A and B by blocks}
+    The fifth approach of multiplying matrices A and B is to cut the matrices into blocks and then multiply block rows of A with block columns of B to get the corresponding blocks of the resulting matrix C.
+
+    \resizebox{\hsize}{!}{
+        $
+            \renewcommand\arraystretch{1.6}
+            % adapted from the SO answer: https://tex.stackexchange.com/a/230505/180993
+            \sbox0{$\begin{matrix}1 & 0 \\ 0 & 1\end{matrix}$}
+            \underbracket[0pt][0pt]{
+                \left[
+                    \begin{array}{c|c}
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $A_1$} & \makebox[\wd0]{\large $A_2$} \\
+                        \hline
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $A_3$} & \makebox[\wd0]{\large $A_4$}
+                    \end{array}
+                    \right]
+            }_{\mathstrut \underset{m \times n}{A}}
+            \underbracket[0pt][0pt]{
+                \left[
+                    \begin{array}{c|c}
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $B_1$} & \makebox[\wd0]{\large $B_2$} \\
+                        \hline
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $B_3$} & \makebox[\wd0]{\large $B_4$}
+                    \end{array}
+                    \right]
+            }_{\mathstrut \underset{n \times p}{B}}
+            =
+            \underbracket[0pt][0pt]{
+                \left[
+                    \begin{array}{c|c}
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $C_1$} & \makebox[\wd0]{\large $C_2$} \\
+                        \hline
+                        \vphantom{\usebox{0}}\makebox[\wd0]{\large $C_3$} & \makebox[\wd0]{\large $C_4$}
+                    \end{array}
+                    \right]
+            }_{\mathstrut \underset{m \times p}{C}}
+        $
+    }
+    The first block, $C_1$, is the dot product of the first block row of matrix A and the first block column of matrix B, i.e.,  $A_1\times B_1 + A_2 \times B_3$, and other blocks are obtained similarly.
+}
+
+\sectionboxnew{
+    \subsection{Matrix inverses}
+    Inverse of a matrix A is a matrix that when pre-multiplied or post-multiplied to A returns an identity matrix. Identity matrix is a square matrix (same number of rows and columns) and has $1$s along the diagonal and $0$s off the diagonal. A $3 \times 3$ identity matrix is represented as follows.
+    \[
+        \underset{3 \times 3}{I}
+        =
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{bmatrix}
+    \]
+    Also, depending on whether it's pre-multiplied or post-multiplied, it's also called the left inverse of A (sitting on the left of A) or the right inverse of A.
+    \[
+        A^{-1}A = I = AA^{-1} \text{(if the inverse exists)}
+    \]
+    For rectangular matrices, left and right inverses are not the same. In fact, the rules of matrix multiplication won't allow that. However, they are the same for square matrices. \\
+
+    If there exists a non-zero vector $x$ that when post-multiplied to A results in a zero vector, then the matrix A does not have an inverse and it's called non-invertible or singular matrix. Otherwise, it's called invertible or non-singular matrix. \\
+
+    For example, the matrix $\begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}$ does not have an inverse because there exists a non-zero vector $\begin{bmatrix*}[r] 3 \\ -1 \end{bmatrix*}$ that when post-multiplied to the matrix results in a zero vector:
+    \[
+        \begin{bmatrix*}[r]
+            1 & 3 \\
+            2 & 6
+        \end{bmatrix*}
+        \begin{bmatrix*}[r]
+            3 \\
+            -1
+        \end{bmatrix*}
+        =
+        \begin{bmatrix*}[r]
+            0 \\
+            0
+        \end{bmatrix*}
+    \]
+}
+
+\sectionboxnew{
+    \subsection{Gauss Jordan elimination}
+    Gauss-Jordan elimination is an extended form of Gauss elimination that not only cleans the elements below the pivots, but also above it. This method is generally used to find the inverse of  a matrix, if it exists. \\
+    Let's first look at the big picture and then find the inverse of
+    $
+        \begin{bmatrix}
+            1 & 3 \\
+            2 & 7
+        \end{bmatrix}
+    $
+    using the Gauss-Jordan elimination technique.\\
+
+    From the definition of an inverse, it follows that to obtain the inverse of the $2 \times 2$ example matrix, a $2 \times 2$ matrix needs to be identified that when post-multiplied to the example matrix returns an identity matrix:
+    \[
+        \begin{bmatrix}
+            1 & 3 \\
+            2 & 7
+        \end{bmatrix}
+        \begin{bmatrix}
+            a & b \\
+            c & d
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{bmatrix}
+    \]
+    Interestingly, solving the above equation is like solving two equations at once:
+    \[
+        \begin{bmatrix}
+            1 & 3 \\
+            2 & 7
+        \end{bmatrix}
+        \begin{bmatrix}
+            a \\
+            c
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            1 \\
+            0
+        \end{bmatrix}
+        \text{and}
+        \begin{bmatrix}
+            1 & 3 \\
+            2 & 7
+        \end{bmatrix}
+        \begin{bmatrix}
+            b \\
+            d
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            0 \\
+            1
+        \end{bmatrix}
+    \]
+    Now let's follow the steps of Gauss-Jordan elimination to find the inverse of the example matrix. \\
+
+    Step 0: Tack on the identity matrix to the example matrix and create an augmented matrix:
+    \[
+        \begin{bmatrix}
+            1 & 3 & \BAR & 1 & 0 \\
+            2 & 7 & \BAR & 0 & 1
+        \end{bmatrix}
+    \]
+    Step 1: Mark the first pivot at (1, 1) and clean off every element below it:
+    \[
+        \begin{gmatrix}[b]
+            \boxed{1} & 3 & \BAR & 1 & 0 \\
+            2 & 7 & \BAR & 0 & 1
+            \rowops
+            \add[-2]{0}{1}
+        \end{gmatrix}
+        \xrightarrow{E_{21}}
+        \begin{gmatrix}[b]
+            \boxed{1} & 3 & \BAR & 1 & 0 \\
+            0 & 1 & \BAR & -2 & 1
+        \end{gmatrix}
+    \]
+    Step 2: Mark the second pivot at (2, 2). Now, there is nothing to clean below the second pivot and Gauss would have stopped. But Jordan asked to move upward to clean elements above it:
+    \[
+        \begin{gmatrix}[b]
+            \boxed{1} & 3 & \BAR & 1 & 0 \\
+            0 & \boxed{1} & \BAR & -2 & 1
+            \rowops
+            \add[-3]{1}{0}
+        \end{gmatrix}
+        \xrightarrow{E_{12}}
+        \begin{gmatrix}[b]
+            \boxed{1} & 0 & \BAR & 7 & -3 \\
+            0 & \boxed{1} & \BAR & -2 & 1
+        \end{gmatrix}
+    \]
+    As evident from the steps shown above, a bunch of elimination matrices operated on the augmented matrix and turned the example matrix (say A) into an identity matrix. However, it's not immediately obvious how the identity matrix got transformed into the inverse of A. \\
+
+    Let's see why that happened. The operation $E\begin{bmatrix} A & \BAR & I \end{bmatrix}$ resulted in another augmented matrix$\begin{bmatrix} I & \BAR & E \end{bmatrix}$. Comparing both sides gives $EA = I$ and from the definition of an inverse it follows that $E = A^{-1}$.
+}
+
+\onlyinsubfile{\end{multicols*}}
+
+\end{document}
