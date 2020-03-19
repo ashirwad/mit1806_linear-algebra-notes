@@ -1,3 +1,3 @@
 Compiled figure
 ---------------
-![Figure](figure.png)
+![Figure](github-figure.png)
