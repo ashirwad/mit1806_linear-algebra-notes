@@ -1,26 +1,50 @@
-%!TeX root = lec01_geometry-of-linear-equations
+% ==============================================================================
+% Build document locally with arara
+% ==============================================================================
+
+% arara: latexmk: {options: [-pv]}
+% arara: indent: {overwrite: yes, silent: yes, cruft: build/}
 \documentclass[../main.tex]{subfiles}
 
+% ==============================================================================
+% BEGIN DOCUMENT
+% ==============================================================================
 \begin{document}
 
-\section{Geometry of linear equations}
 
+% SECTION ======================================================================
+\section{The Geometry of Linear Equations}
+
+
+% SUBSECTION ===================================================================
 \subsection{Overview}
+% ==============================================================================
 This lecture mainly discusses the three visualization techniques--matrix picture, row picture, and column picture--that are typically used for understanding linear equations, and very briefly touches upon the concepts of linear combination and matrix multiplication.
 
+
+% SUBSECTION ===================================================================
 \subsection{Linear system visualization techniques}
-Dr. Strang proposed the following three visual techniques to understand a linear system of equations before solving them: \\
-\begin{tabular}{@{}ll@{}} \trule
-    \textrm{Visual type} & \textrm{Explanation}                                                  \\ \mrule
-    Matrix picture       & \makecell[tl]{It's the algebra way to visualize a linear system using \\ the equation $Ax = b$*} \\
-    Row picture          & \makecell[tl]{It's the picture created from plotting the solutions to \\ each equation (or row of $A$) in the linear system} \\
-    Column picture       & \makecell[tl]{It's the picture created from plotting the columns of   \\ $A$ and their linear combination that yields $b$} \\ \brule
+% ==============================================================================
+Dr. Strang proposed the following three visual techniques to understand a linear system of equations before solving them:
+
+\begin{tabular}{@{}ll@{}}
+    \trule
+    \textrm{Visual type} & \textrm{Explanation}                                              \\
+    \mrule
+    Matrix picture       & \makecell{It's the algebra way to visualize a linear system using \\ the equation \(Ax = b\)*} \\
+    Row picture          & \makecell{It's the picture created from plotting the solutions to \\ each equation (or row of \(A\)) in the linear system} \\
+    Column picture       & \makecell{It's the picture created from plotting the columns of   \\ \(A\) and their linear combination that yields \(b\)} \\
+    \brule
 \end{tabular}
-*$A$ is the coefficient matrix, $x$ is the vector of unknowns, and $b$ is the right-hand side vector \\
+*\(A\) is the coefficient matrix, \(x\) is the vector of unknowns, and \(b\) is the right-hand side vector
+\vspace{0.5em}
 
-The subsequent sections show the examples of matrix picture, row picture, and column picture for $2 \times 2$ and $3 \times 3$ system of equations.
+The subsequent sections show the examples of matrix picture, row picture, and column picture for \(2 \times 2\) and \(3 \times 3\) system of equations.
 
+
+% SUBSECTION ===================================================================
 \subsection{2-by-2 equations}
+% ==============================================================================
 For the first example, consider the following system with two equations in two unknowns:
 \[
     \systeme{2x - y = 0, -x + 2y = 3}
@@ -28,7 +52,8 @@ For the first example, consider the following system with two equations in two u
 and visualize it using the matrix picture, row picture, and column picture.
 
 \subsubsection{Matrix picture}
-To get the matrix picture, express the equations in this 2-by-2 linear system in the form $Ax = b$:
+To get the matrix picture, express the equations in this 2-by-2 linear system in the form \(Ax = b\):
+% Adapted from SO: https://tex.stackexchange.com/a/78463/180993
 \[
     \underbracket[0pt][0pt]{
         \begin{bmatrix*}[r]
@@ -56,7 +81,8 @@ To get the row picture, plot all the points that satisfy each equation in this 2
 
 \begingroup
 \centering
-\includegraphics[width = \columnwidth]{../figures/fig01_2d-row-pic/figure.pdf}
+% TODO: Shorten figure path when subfiles bug is fixed
+\includegraphics[width = \columnwidth]{../figures/fig01_2d-row-pic/figure}
 \par
 \endgroup
 
@@ -65,14 +91,14 @@ To get the column picture, plot the columns of the coefficient matrix for this 2
 
 \begingroup
 \centering
-\includegraphics[width = 0.5\columnwidth]{../figures/fig02_2d-col-pic/figure.pdf}
+\includegraphics[width = 0.6\columnwidth]{../figures/fig02_2d-col-pic/figure}
 \par
 \endgroup
 
 \subsubsection{Linear combination idea}
-Linear combination of vectors is a fundamental operation in matrix algebra that involves multiplying vectors with scalars and adding them together. \\
+Linear combination of vectors is a fundamental operation in matrix algebra that involves multiplying vectors with scalars and adding them together. \vspace{0.5em}
 
-The column picture shown in the previous section is a graphical representation of the linear combination of left-hand side vectors (with $x$ = 1 and $y$ = 2) in the following equation:
+The column picture shown for the 2-by-2 case is a graphical representation of the linear combination of left-hand side vectors (with \(x\) = 1 and \(y\) = 2) in the following equation:
 \[
     x \times
     \begin{bmatrix*}[r]
@@ -91,27 +117,34 @@ The column picture shown in the previous section is a graphical representation o
         3
     \end{bmatrix*}
 \]
-Additionally, some fundamental questions involving linear combinations that keep on coming very often for linear systems $Ax = b$ are as follows.
-\begin{tabular}{@{}ll@{}} \trule
-    \textrm{Question}                  & \textrm{Answer (2D example)} \\ \mrule
-    What linear combination gives $b$? &
-    $
-        1 \times
-        \begin{bmatrix*}[r]
-            2 \\
-            -1
-        \end{bmatrix*}
-        +
-        2 \times
-        \begin{bmatrix*}[r]
-            -1 \\
-            2
-        \end{bmatrix*}
-    $                                                                 \\
-    \makecell[tl]{What do all the linear combinations give?           \\[2pt] Or, equivalently, what are all the possible, \\ achievable right-hand sides $b$?} & \makecell[tl]{Whole 2D plane \\[2pt] Any vector in the 2D plane}
+Additionally, some fundamental questions involving linear combinations that keep on coming very often for linear systems \(Ax = b\) are as follows.
+
+\begin{tabular}{@{}ll@{}}
+    \trule
+    \textrm{Question}                   & \textrm{Answer (2D example)} \\
+    \mrule
+    What linear combination gives \(b\) &
+    \(
+    1 \times
+    \begin{bmatrix*}[r]
+        2 \\
+        -1
+    \end{bmatrix*}
+    +
+    2 \times
+    \begin{bmatrix*}[r]
+        -1 \\
+        2
+    \end{bmatrix*}
+    \)                                                                 \\
+    \makecell{What do all the linear combinations give?                \\[0.5em] Or, equivalently, what are all the possible, \\ achievable right-hand sides \(b\)?} & \makecell{Whole 2D plane \\[0.5em] Any vector in the 2D \\ plane} \\
+    \brule
 \end{tabular}
 
+
+% SUBSECTION ===================================================================
 \subsection{3-by-3 equations}
+% ==============================================================================
 For the second example, consider the following system with three equations in three unknowns:
 \[
     \systeme{2x - y = 0, -x + 2y - z = -1, -3y + 4z = 4}
@@ -119,7 +152,7 @@ For the second example, consider the following system with three equations in th
 and visualize it using the matrix picture, row picture and column picture.
 
 \subsubsection{Matrix picture}
-To get the matrix picture, express the equations in this 3-by-3 linear system in the form $Ax = b$:
+To get the matrix picture, express the equations in this 3-by-3 linear system in the form \(Ax = b\):
 \[
     \begin{bmatrix*}[r]
         2 & -1 & 0 \\
@@ -144,7 +177,7 @@ To get the row picture, plot all the points that satisfy each equation in this 3
 
 \begingroup
 \centering
-\includegraphics[width = \columnwidth]{../figures/fig03_3d-row-pic/geogebra-derived}
+\includegraphics[width = 0.9\columnwidth]{../figures/fig03_3d-row-pic/geogebra-derived}
 \par
 \endgroup
 
@@ -156,10 +189,10 @@ To get the column picture, plot the columns of the coefficient matrix for this 3
 \includegraphics[width = \columnwidth]{../figures/fig04_3d-col-pic/geogebra-derived}
 \par
 \endgroup
-Notice that in this case, the third column of the coefficient matrix is the same as the right-hand side vector.
+Notice that in this case, the third column of the coefficient matrix \(A\) is same as the right-hand side vector \(b\).
 
 \subsubsection{Linear combination idea}
-The column picture shown in the previous section is a graphical representation of the linear combination of left-hand side vectors (with $x = 0$, $y = 0$, and $z = 1$) in the following equation:
+The column picture shown for the 3-by-3 case is a graphical representation of the linear combination of left-hand side vectors (with \(x = 0\), \(y = 0\), and \(z = 1\)) in the following equation:
 \[
     x \times
     \begin{bmatrix*}[r]
@@ -190,45 +223,51 @@ The column picture shown in the previous section is a graphical representation o
 \]
 Similar to the 2D case, the following table provides answers to two key fundamental questions involving linear combination.
 
-\begin{tabular}{@{}ll@{}} \trule
-    \textrm{Question}                         & \textrm{Answer (3D example)} \\ \mrule
-    What linear combination gives $b$?        & \makecell[tl]{
-        $
-            0 \times
-            \begin{bmatrix*}[r]
-                2 \\
-                -1 \\
-                0
-            \end{bmatrix*}
-            +
-            0 \times
-            \begin{bmatrix*}[r]
-                -1 \\
-                2 \\
-                -3
-            \end{bmatrix*}
-        $
+\begin{tabular}{@{}ll@{}}
+    \trule
+    \textrm{Question}                         & \textrm{Answer (3D example)} \\
+    \mrule
+    What linear combination gives \(b\)?      & \makecell{
+        \(
+        0 \times
+        \begin{bmatrix*}[r]
+            2 \\
+            -1 \\
+            0
+        \end{bmatrix*}
+        +
+        0 \times
+        \begin{bmatrix*}[r]
+            -1 \\
+            2 \\
+            -3
+        \end{bmatrix*}
+        \)
         \\
-        $
-            + 1 \times
-            \begin{bmatrix*}[r]
-                0 \\
-                -1 \\
-                4
-            \end{bmatrix*}
-            =
-            \begin{bmatrix*}[r]
-                0 \\
-                -1 \\
-                4
-            \end{bmatrix*}
-        $
+        \(
+        + 1 \times
+        \begin{bmatrix*}[r]
+            0 \\
+            -1 \\
+            4
+        \end{bmatrix*}
+        =
+        \begin{bmatrix*}[r]
+            0 \\
+            -1 \\
+            4
+        \end{bmatrix*}
+        \)
     }                                                                        \\
-    What do all the linear combinations give? & Whole 3D plane               \\ \brule
+    What do all the linear combinations give? & Whole 3D plane               \\
+    \brule
 \end{tabular}
 
-\subsection{3-by-3 equations with same $A$ but different $b$}
-Let's replace the right-hand side vector $b$ in the previous 3-by-3 example with the sum of the first and the second column of the coefficient matrix $A$ to get the following matrix picture:
+
+% SUBSECTION ===================================================================
+\subsection{3-by-3 equations with same \(A\) but different \(b\)}
+% ==============================================================================
+Let's replace the right-hand side vector \(b\) in the previous 3-by-3 example with the sum of the first and the second columns of the coefficient matrix \(A\) to get the following matrix picture:
 \[
     \begin{bmatrix*}[r]
         2 & -1 & 0 \\
@@ -250,24 +289,27 @@ Let's replace the right-hand side vector $b$ in the previous 3-by-3 example with
 and recreate the row picture and the column picture.
 
 \subsubsection{Row picture}
-The row picture for this new 3-by-3 linear system consists of three new planes that meet at the point $(1, 1, 0)$:
+The row picture for this new 3-by-3 linear system consists of three new planes that meet at the point \((1, 1, 0)\):
 
 \begingroup
 \centering
-\includegraphics[width = \columnwidth]{../figures/fig05_3d-row-pic02/geogebra-derived}
+\includegraphics[width = \columnwidth]{../figures/fig05_3d-row-pic-new-rhs/geogebra-derived}
 \par
 \endgroup
 
 \subsubsection{Column picture}
-The column picture for this new 3-by-3 system consists of the same three columns, but now they combine differently (vector addition of the first and the second vector) to produce $b$:
+The column picture for this new 3-by-3 system consists of the same three columns, but now they combine differently (vector addition of the first and the second vectors) to produce \(b\):
 
 \begingroup
 \centering
-\includegraphics[width = \columnwidth]{../figures/fig06_3d-col-pic02/geogebra-derived}
+\includegraphics[width = \columnwidth]{../figures/fig06_3d-col-pic-new-rhs/geogebra-derived}
 \par
 \endgroup
 
-\subsection{3-by-3 equations with singular $A$}
+
+% SUBSECTION ===================================================================
+\subsection{3-by-3 equations with singular \(A\)}
+% ==============================================================================
 Let's modify the original 3-by-3 linear system again, but this time change the third column of the coefficient matrix so that it is the sum of the first and the second columns:
 \[
     \begin{bmatrix*}[r]
@@ -294,22 +336,32 @@ Now, create the column picture:
 \includegraphics[width = \columnwidth]{../figures/fig07_3d-singular-col-pic/geogebra-derived}
 \par
 \endgroup
-As can be seen in the picture, the three columns of the coefficient matrix lie on the same plane, and consequently all their linear combinations also lie in the same plane. So, this system can be solved only when $b$ is in the plane and for all other cases there is no solution. \\
+As can be seen in the picture, the three columns of the coefficient matrix lie on the same plane, and consequently all their linear combinations also lie in the same plane. So, this system can be solved only when \(b\) is in the plane and for all other cases there is no solution.
+\vspace{0.5em}
 
-\textbf{Note:} The coefficient matrix $A$ for a linear system is called singular or non-invertible if the linear system cannot be solved for every right-hand side $b$. If there is a solution for every $b$, then the matrix $A$ is called non-singular or invertible. \\
+\textbf{Note:} The coefficient matrix \(A\) for a linear system is called singular or non-invertible if the linear system cannot be solved for every right-hand side \(b\). If there is a solution for every \(b\), then the matrix \(A\) is called non-singular or invertible.
+\vspace{0.5em}
 
-Also, let's answer the two key fundamental questions for this 3-by-3 linear system with a singular $A$:
+Also, let's answer the two key fundamental questions for this 3-by-3 linear system with a singular \(A\):
 
-\begin{tabular}{@{}ll@{}} \trule
-    \textrm{Question}                         & \textrm{Answer}                                   \\ \mrule
-    What linear combination gives $b$?        & \makecell[tl]{None; Notice that vector $b$ in the \\ column picture is off the plane \\ spanned by the columns of  $A$} \\
-    What do all the linear combinations give? & \makecell[tl]{A 2D plane inside a                 \\ 3D space} \\ \brule
+\begin{tabular}{@{}ll@{}}
+    \trule
+    \textrm{Question}                         & \textrm{Answer}                          \\
+    \mrule
+    What linear combination gives \(b\)?      & \makecell{None; Notice that vector \(b\) \\ in the column picture is off \\ the plane spanned by the \\ columns of \(A\)} \\
+    What do all the linear combinations give? & \makecell{A 2D plane inside a            \\ 3D space} \\
+    \brule
 \end{tabular}
 
-\subsection{Extending ideas to higher dimensional linear systems}
-The techniques used for visualizing 2D and 3D systems can easily be extended to higher dimensions, but except for the matrix picture, the other two picture types become pretty unintuitive. \\
 
-Additionally, the ideas of what linear combination gives $b$ and what do all the linear combinations give are also generalizable. \\
+% SUBSECTION ===================================================================
+\subsection{Extending ideas to higher dimensional linear systems}
+% ==============================================================================
+The techniques used for visualizing 2D and 3D systems can easily be extended to higher dimensions, but except for the matrix picture, the other two picture types become pretty unintuitive.
+\vspace{0.5em}
+
+Additionally, the ideas of what linear combination gives \(b\) and what do all the linear combinations give are also generalizable.
+\vspace{0.5em}
 
 For example, let's consider the following two scenarios for a linear system with nine equations in nine unknowns and see how the ideas of linear combination can be generalized:
 
@@ -326,19 +378,22 @@ For example, let's consider the following two scenarios for a linear system with
 \]
 In this case, the linear combination of the columns of A will fill the whole 9D space and every 9D vector is reachable.
 
-\textbf{Scenario 2:} Nineth column (\( a_{9} \)) is same as the eighth column (\( a_{8} \))
+\textbf{Scenario 2:} Nineth column (\(a_{9}\)) is same as the eighth column (\(a_{8}\))
 \[
     A
     =
     \begin{bmatrix}
-        \vertbar &        & \vertbar & \vertbar \\
-        a_{1}    & \ldots & a_{8}    & a_{9}    \\
-        \vertbar &        & \vertbar & \vertbar \\
+        \vertbar &       & \vertbar & \vertbar \\
+        a_{1}    & \dots & a_{8}    & a_{9}    \\
+        \vertbar &       & \vertbar & \vertbar \\
     \end{bmatrix}
 \]
-In this case, the linear combination of the columns of $A$ will only fill the 8D plane (sort of) inside a 9D space and only vectors in the 8D plane are reachable.
+In this case, the linear combination of the columns of \(A\) will only fill the 8D plane (sort of) inside a 9D space and only vectors in the 8D plane are reachable.
 
+
+% SUBSECTION ===================================================================
 \subsection{Matrix times a column vector}
+% ==============================================================================
 A matrix when post-multiplied by a column vector produces a column vector. To get the resulting vector just multiply the columns of the matrix by the elements of the multiplying vector and add as shown in the following example:
 \[
     \begin{bmatrix}
@@ -379,4 +434,8 @@ A matrix when post-multiplied by a column vector produces a column vector. To ge
 \]
 In other words, a matrix times a column is a linear combination of the columns of the matrix with weights provided by the elements of the multiplying vector.
 
+
+% ==============================================================================
+% END DOCUMENT
+% ==============================================================================
 \end{document}
