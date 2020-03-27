@@ -1,320 +1,420 @@
-%
+% ==============================================================================
+% Build Document Locally with Arara
+% ==============================================================================
+
+% arara: latexmk: {options: [-pv]}
+% arara: indent: {overwrite: yes, silent: yes, cruft: build/}
 \documentclass[../main.tex]{subfiles}
 
+% ==============================================================================
+% BEGIN DOCUMENT
+% ==============================================================================
 \begin{document}
 
-\onlyinsubfile{\begin{multicols*}{4}}
 
-        \section{Elimination with matrices}
+% SECTION ======================================================================
+\section{Elimination with Matrices}
 
-        \sectionboxnew{
-            \subsection{Gauss elimination}
-            Gauss elimination is a systematic way for solving any system of linear equations. The rule simply involves selecting a pivot in each row and cleaning everything below it through row reduction. \\
 
-            The elimination generally succeeds normally, but may encounter either of the two other situations besides normal success:
+% SUBSECTION ===================================================================
+\subsection{Overview}
+% ==============================================================================
+This lecture discusses the rules for Gaussian elimination and the three situations--normal success, temporary failure, and permanent failure--that are typically encountered during the elimination. Additionally, the lecture also covers the concepts of back substitution, elimination matrices, and permutation matrices.
 
-            \begin{tabular}{@{}ll@{}} \trule
-                \textrm{Situation} & \textrm{Explanation}                                          \\ \mrule
-                Normal success     & \makecell[tl]{Gauss elimination succeeds normally without any \\ row exchanges} \\
-                Temporary failure  & Gauss elimination succeeds with row exchanges                 \\
-                Permanent failure  & Gauss elimination does not succeed                            \\ \brule
-            \end{tabular} \\
 
-            The following sections illustrate each of the three situations encountered by Gauss elimination.
+% SUBSECTION ===================================================================
+\subsection{Gaussian elimination}
+% ==============================================================================
+Gaussian elimination is a systematic way of  solving any system of linear equations. The rule of elimination simply involves selecting a pivot in each row and cleaning everything below it through row reduction.
+\vspace{0.5em}
+
+Elimination generally succeeds by following the normal rule, but may sometimes encounter either of the two situations besides normal success:
+
+\begin{tabular}{@{}ll@{}}
+    \trule
+    \textrm{Situation} & \textrm{Explanation}                                     \\
+    \mrule
+    Normal success     & \makecell{Gaussian elimination succeeds normally without \\ any row exchanges} \\
+    Temporary failure  & Gaussian elimination succeeds with row exchanges         \\
+    Permanent failure  & Gaussian elimination does not succeed                    \\
+    \brule
+\end{tabular}
+\vspace{0.5em}
+
+The following sections illustrate each of the three situations encountered by Gaussian elimination.
+
+
+% SUBSECTION ===================================================================
+\subsection{Normal success}
+% ==============================================================================
+Let's solve this linear system using Gaussian elimination and see it succeed normally:
+\[
+    \systeme{x + 2y + z = 2, 3x + 8y + z = 12, 4y + z = 2}
+\]
+\textbf{Step 1:} Start with marking the first pivot at \((1, 1)\) position in the coefficient matrix \(A\) and clean off \((2, 1)\) position
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        3 & 8 & 1 \\
+        0 & 4 & 1
+        \rowops
+        \add[-3]{0}{1}
+    \end{gmatrix}
+    \xrightarrow{E_{21}}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & 2 & -2 \\
+        0 & 4 & 1
+    \end{gmatrix}
+\]
+\textbf{Step 2:} Since everything below the first pivot is now clean, mark the second pivot at \((2, 2)\) and clean off \((3, 2)\)
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 4 & 1
+        \rowops
+        \add[-2]{1}{2}
+    \end{gmatrix}
+    \xrightarrow{E_{32}}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 0 & 5
+    \end{gmatrix}
+\]
+\textbf{Final step:} Since everything below the second pivot is now clean and there is nothing to clean below the third pivot at \((3, 3)\), just mark it and call it the end
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 0 & \boxed{5}
+    \end{gmatrix}
+    % Adapted from SO: https://tex.stackexchange.com/a/58323/180993
+    \qquad \text{\parbox{4cm}{
+            \textbf{Fact 1:} This matrix is called an \emph{upper triangular matrix}, usually denoted with \(U\) \\[0.25cm]
+            \textbf{Fact 2:} The product of the pivots of \(U\) gives its \emph{determinant}, so here \(det(U) = 10\)
         }
+    }
+\]
+\textbf{Note:} \(E_{21}\) and \(E_{32}\) are \emph{elimination matrices} that pre-multiply the matrices on the left of the arrow to produce the ones on the right. See the section on elimination matrices to learn more.
 
-        \sectionboxnew{
-            \subsubsection{Normal success}
-            Let's solve this linear system using Gauss elimination and see it succeed normally:
-            \[
-                \systeme{x + 2y + z = 2, 3x + 8y + z = 12, 4y + z = 2}
-            \]
-            \textbf{Step 1:} Start with marking the first pivot at $(1, 1)$ position in the coefficient matrix $A$ and clean off $(2, 1)$ position
 
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                3 & 8 & 1 \\
-                0 & 4 & 1
-                \rowops
-                \add[-3]{0}{1}
-            \end{gmatrix}
-            \xrightarrow{E_{21}}
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & 2 & -2 \\
-                0 & 4 & 1
-            \end{gmatrix} \\
-
-            \textbf{Step 2:} Since everything below the first pivot is now cleaned, mark the second pivot at $(2, 2)$  and clean off $(3, 2)$
-
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{2} & -2 \\
-                0 & 4 & 1
-                \rowops
-                \add[-2]{1}{2}
-            \end{gmatrix}
-            \xrightarrow{E_{32}}
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{2} & -2 \\
-                0 & 0 & 5
-            \end{gmatrix} \\
-
-            \textbf{Final step:} Since everything below the second pivot is now clean and there is nothing to clean below the third pivot at $(3, 3)$, just mark it and call it the end
-
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{2} & -2 \\
-                0 & 0 & \boxed{5}
-            \end{gmatrix}
-            \right \qquad \text{\parbox{4cm}{
-                    \textbf{Fact 1:} This matrix is called an \textit{upper triangular matrix}, usually denoted with \textbf{$U$} \\[0.25cm]
-                    \textbf{Fact 2:} The product of the pivots of $U$ gives its \textit{determinant}, so here $det(U) = 10$}
-            }
+% SUBSECTION ===================================================================
+\subsection{Temporary failure}
+% ==============================================================================
+Let's solve this linear system using Gaussian elimination and see it overcome temporary failure:
+\[
+    \systeme{x + 2y + z = 2, 3x + 6y + z = 12, 4y + z = 2}
+\]
+\textbf{Step 1:} This step is same as the step in the \emph{normal success example}
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        3 & 6 & 1 \\
+        0 & 4 & 1
+        \rowops
+        \add[-3]{0}{1}
+    \end{gmatrix}
+    \xrightarrow{E_{21}}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & 0 & -2 \\
+        0 & 4 & 1
+    \end{gmatrix}
+\]
+\textbf{Step 2:} Similar to the normal success example, entries below the first pivot are clean, but now there is an undesirable \(0\) at the second pivot position \((2, 2)\). Let's swap the second and the third row to get a non-zero entry at \((2, 2)\).
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{0} & -2 \\
+        0 & 4 & 1
+        \rowops
+        \swap{1}{2}
+    \end{gmatrix}
+    \xrightarrow{P_{23}}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{4} & 1 \\
+        0 & 0 & -2
+    \end{gmatrix}
+\]
+\textbf{Final step:} This step is also same as the step in the normal success example
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{4} & 1 \\
+        0 & 0 & \boxed{-2}
+    \end{gmatrix}
+    \qquad \text{\parbox{4cm}{
+            \textbf{Fact 1:} \(det(U) = 1 \times 4 \times -2 = -8\) \\[0.25cm]
+            \textbf{Fact 2:} Since the \(det(U)\) is non-zero, the underlying matrix \(A\) is \emph{invertible} or \emph{non-singular}
         }
+    }
+\]
+\textbf{Note:} \(P_{23}\) is a \emph{permutation matrix} that pre-multiplies the matrix on the left of the arrow to swap rows 2 and 3 and produce the matrix on the right. See the section on permutation matrices to learn more.
 
-        \sectionboxnew{
-            \subsubsection{Temporary failure}
-            Let's solve this linear system using Gauss elimination and see it overcome temporary failure:
-            \[
-                \systeme{x + 2y + z = 2, 3x + 6y + z = 12, 4y + z = 2}
-            \]
-            \textbf{Step 1:} It is same as the \textit{normal success example}
 
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                3 & 6 & 1 \\
-                0 & 4 & 1
-                \rowops
-                \add[-3]{0}{1}
-            \end{gmatrix}
-            \xrightarrow{E_{21}}
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & 0 & -2 \\
-                0 & 4& 1
-            \end{gmatrix}\\
-
-            \textbf{Step 2:} Similar to the \textit{normal success example}, entries below the first pivot are clean, but now there is an undesirable $0$ at the second pivot position $(2, 2)$. Let's swap it with the row below to get a non-zero entry.
-
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{0} & -2 \\
-                0 & 4& 1
-                \rowops
-                \swap{1}{2}
-            \end{gmatrix}
-            \xrightarrow{P_{23}}
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{4} & 1 \\
-                0 & 0 & -2
-            \end{gmatrix}\\
-
-            \textbf{Final step:} It is also same as the \textit{normal success example}
-
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{4} & 1 \\
-                0 & 0 & \boxed{-2}
-            \end{gmatrix}
+% SUBSECTION ===================================================================
+\subsection{Permanent failure}
+% ==============================================================================
+Let's solve this linear system using Gaussian elimination and see it fail to escape failure:
+\[
+    \systeme{x + 2y + z = 2, 3x + 8y + z = 12, 4y - 4z = 2}
+\]
+\textbf{Step 1:} This step is same as the step in the normal success example
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        3 & 8 & 1 \\
+        0 & 4 & -4
+        \rowops
+        \add[-3]{0}{1}
+    \end{gmatrix}
+    \xrightarrow{E_{21}}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & 2 & -2 \\
+        0 & 4 & -4
+    \end{gmatrix}
+\]
+\textbf{Step 2:} This step is same as the step in the normal success example
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 4 & -4
+        \rowops
+        \add[-2]{1}{2}
+    \end{gmatrix}
+    \xrightarrow{E_{32}}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 0 & 0
+    \end{gmatrix}
+\]
+\textbf{Final step:} Entries below the first and the second pivots are all clean, which is good, but there is a \(0\) at the pivot position with no row below to exchange it, so call it the end and declare elimination failure.
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 0 & \boxed{\textcolor{red}{0}}
+    \end{gmatrix}
+    \qquad \text{\parbox{4cm}{
+            \textbf{Fact 1:} \(det(U) = 1 \times 2 \times 0 = 0\) \\[0.25cm]
+            \textbf{Fact 2:} Since the \(det(U)\) is zero, the underlying matrix \(A\) is \emph{non-invertible} or \emph{singular}
         }
+    }
+\]
 
-        \sectionboxnew{
-            \subsection{Permanent failure}
-            Let's solve this linear system using Gauss elimination and see it fail to escape failure:
-            \[
-                \systeme{x + 2y + z = 2, 3x + 8y + z = 12, 4y - 4z = 2}
-            \]
-            \textbf{Step 1:} Same as the \textit{normal success example}
 
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                3 & 8 & 1 \\
-                0 & 4 & -4
-                \rowops
-                \add[-3]{0}{1}
-            \end{gmatrix}
-            \xrightarrow{E_{21}}
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & 2 & -2 \\
-                0 & 4& -4
-            \end{gmatrix}\\
+% SUBSECTION ===================================================================
+\subsection{Back substitution}
+% ==============================================================================
+Back substitution is a technique used for obtaining the solution to a linear system by working bottom-up with the reduced form of the system, \(Ux = c\), obtained through Gaussian elimination.
+\vspace{0.5em}
 
-            \textbf{Step 2:} Same as the \textit{normal success example}
+For the linear system in the normal success example, create an augmented matrix by tacking on the right-hand-side vector \(b\) onto the coefficient matrix \(A\) and repeat the Gaussian elimination steps on the augmented matrix:
 
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{2} & -2 \\
-                0 & 4& -4
-                \rowops
-                \add[-2]{1}{2}
-            \end{gmatrix}
-            \xrightarrow{E_{32}}
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{2} & -2 \\
-                0 & 0 & 0
-            \end{gmatrix}\\
+\textbf{Step 1:}
+\[
+    \begin{gmatrix}[b]
+        1 & 2 & 1 & \BAR & 2 \\
+        3 & 8 & 1 & \BAR & 12 \\
+        0 & 4 & 1 & \BAR & 2
+        \rowops
+        \add[-3]{0}{1}
+    \end{gmatrix}
+    \xrightarrow{E_{21}}
+    \begin{gmatrix}[b]
+        1 & 2 & 1 & \BAR & 2 \\
+        0 & 2 & -2 & \BAR & 6 \\
+        0 & 4 & 1 & \BAR & 2
+    \end{gmatrix}
+\]
+\textbf{Step 2:}
+\[
+    \begin{gmatrix}[b]
+        1 & 2 & 1 & \BAR & 2 \\
+        0 & 2 & -2 & \BAR & 6 \\
+        0 & 4 & 1 & \BAR & 2
+        \rowops
+        \add[-2]{1}{2}
+    \end{gmatrix}
+    \xrightarrow{E_{32}}
+    \begin{gmatrix}[b]
+        1 & 2 & 1 & \BAR & 2 \\
+        0 & 2 & -2 & \BAR & 6 \\
+        0 & 0 & 5 & \BAR & -10
+    \end{gmatrix}
+\]
+The system of equations can now be rewritten as:
+\[
+    \systeme{x + 2y + z = 2, 2y - 2z = 6, 5z = -10}
+\]
+Use back-substitution to obtain \(z = -2\), \(y = 1\) and \(x = 2\) as the solution to this linear system.
 
-            \textbf{Final step:} Entries below the first and the second pivots are all clean, which is good, but there is a \mathbf{0} at the pivot position with no row below to exchange it, so call it the end and declare elimination failure.
 
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                0 & \boxed{2} & -2 \\
-                0 & 0 & \boxed{\textcolor{red}{0}}
-            \end{gmatrix}\right \qquad
-            \text{\parbox{4cm}{
-                    \textbf{Fact 1:} As noted before, product of pivot elements of $U$ give its  determinant, so here $det(U) = 0$\\[0.25cm]
-                    \textbf{Fact 2:} A square matrix with a 0 determinant value is called \textit{non-invertible} or \textit{singular} matrix}
-            }
-        }
+% SUBSECTION ===================================================================
+\subsection{Elimination matrices}
+% ==============================================================================
+Elimination (or Elementary) matrices refer to a set of matrices that are pre-multiplied to a coefficient matrix \(A\) to produce an upper-triangular matrix \(U\).
+\vspace{0.5em}
 
-        \sectionboxnew{
-            \subsection{Back substitution}
-            Back substitution is a technique used for obtaining the solution to the linear system by working bottom-up with the reduced form of the system, $UX = c$, obtained through Gauss elimination. \\
+So, the elimination steps shown in the normal success example compactly can also be expressed explicitly using elimination matrices:
 
-            Create an augmented matrix for equation ... by tacking on the right-hand-side vector onto the coefficient matrix $A$ and repeat the Gauss elimination steps from \textit{normal success example}: \\
+\(E_{21}\) \textbf{step:}
+\[
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        3 & 8 & 1 \\
+        0 & 4 & 1
+        \rowops
+        \add[-3]{0}{1}
+    \end{gmatrix}
+    \equiv
+    \begin{bmatrix*}[r]
+        1  & 0 & 0 \\
+        -3 & 1 & 0 \\
+        0  & 0 & 1
+    \end{bmatrix*}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        3 & 8 & 1 \\
+        0 & 4 & 1
+    \end{gmatrix}
+\]
 
-            Step 1:
+\(E_{32}\) \textbf{step:}
 
-            \begin{gmatrix}[b]
-                1 & 2 & 1 & \BAR & 2 \\
-                3 & 8 & 1 & \BAR & 12 \\
-                0 & 4 & 1 & \BAR & 2
-                \rowops
-                \add[-3]{0}{1}
-            \end{gmatrix}
-            \xrightarrow{E_{21}}
-            \begin{gmatrix}[b]
-                1 & 2 & 1 & \BAR & 2 \\
-                0 & 2 & -2 & \BAR & 6 \\
-                0 & 4 & 1 & \BAR & 2
-            \end{gmatrix}
+\begin{adjustbox}{width = \columnwidth}
+    \renewcommand\arraystretch{1.4}
+    \(
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 4 & 1
+        \rowops
+        \add[-2]{1}{2}
+    \end{gmatrix}
+    \equiv
+    \begin{bmatrix*}[r]
+        1  & 0 & 0 \\
+        0 & 1 & 0 \\
+        0  & -2 & 1
+    \end{bmatrix*}
+    \begin{gmatrix}[b]
+        \boxed{1} & 2 & 1 \\
+        0 & \boxed{2} & -2 \\
+        0 & 4 & 1
+    \end{gmatrix}
+    \)
+\end{adjustbox}
+The elements of the elimination matrices follow from the fact that a row times a matrix is a linear combination of the rows of the matrix. For example, the \(E_{21}\) step leaves the first and third rows unchanged and subtracts three times row 1 from row 2. So, the corresponding weights in the corresponding rows of the elimination matrix are \(1\)'s and \(-3\) and zeros elsewhere. \vspace{0.5em}
 
-            Step 2:
+Additionally, the overall elimination process when expressed in matrix language will look like the following:
+\[
+    E_{32}(E_{21}A) = U; \text{or equivalently, } (E_{32}E_{21})A = U
+\]
+\textbf{Note:} The parenthesis can be moved to change the order of operation, i.e., the \emph{associative law} holds, but the matrices have be in their Gauss given order, i.e., the \emph{commutative law} does not hold.
 
-            \begin{gmatrix}[b]
-                1 & 2 & 1 & \BAR & 2 \\
-                0 & 2 & -2 & \BAR & 6 \\
-                0 & 4 & 1 & \BAR & 2
-                \rowops
-                \add[-2]{1}{2}
-            \end{gmatrix}
-            \xrightarrow{E_{32}}
-            \begin{gmatrix}[b]
-                1 & 2 & 1 & \BAR & 2 \\
-                0 & 2 & -2 & \BAR & 6 \\
-                0 & 0 & 5 & \BAR & -10
-            \end{gmatrix}
 
-            The system of equation shown in ... can now be rewritten as:
-            \[
-                \systeme{x + 2y + z = 2, 2y - 2z = 6, 5z = -10}
-            \]
-            Use back-substitution to obtain $z = -2$, $y = 1$ and $x = 2$ as the solution to equation ...
-        }
+% SUBSECTION ===================================================================
+\subsection{Permutation matrices}
+% ==============================================================================
+Permutation matrices (\(P\)) are a group of square matrices obtained by exchanging either the rows or the columns of an \emph{identity matrix} (a square matrix with \(1\)'s along the diagonal and zeros off the diagonal). In matrix operations, such matrices are used for swapping rows or/and columns of a matrix.
 
-        \sectionboxnew{
-            \subsection{Elimination matrices}
-            Elimination matrices refer to a set of matrices that are pre-multiplied to the coefficient matrix or the augmented matrix to produce the upper-triangular matrix \bm{U}. \\
+\begin{tabular}{@{}ll@{}}
+    \trule
+    \textrm{Task} & \textrm{Execution} \\
+    \mrule
+    \makecell{
+        Swap rows,
+        \(
+        \begin{gmatrix}[b]
+            a & b \\
+            c & d
+            \rowops
+            \swap{0}{1}
+        \end{gmatrix}
+        \),                            \\ to get
+        \(
+        \begin{gmatrix}[b]
+            c & d \\
+            a & b
+        \end{gmatrix}
+        \)
+    }
+                  &
+    \makecell{
+        Swap rows,
+        \(
+        \begin{gmatrix}[b]
+            1 & 0 \\
+            0 & 1
+            \rowops
+            \swap{0}{1}
+        \end{gmatrix}
+        \), to get \(P\)               \\
+        and pre-multiply:
+        \(
+        \begin{bmatrix}
+            0 & 1 \\
+            1 & 0
+        \end{bmatrix}
+        \begin{bmatrix}
+            a & b \\
+            c & d
+        \end{bmatrix}
+        \)
+    }                                  \\
+    \mrule
+    \makecell{
+        Swap columns,
+        \(
+        \begin{gmatrix}[b]
+            a & b \\
+            c & d
+            \colops
+            \swap{0}{1}
+        \end{gmatrix}
+        \),                            \\ to get
+        \(
+        \begin{gmatrix}[b]
+            b & a \\
+            d & c
+        \end{gmatrix}
+        \)
+    }
+                  &
+    \makecell{
+        Swap columns,
+        \(
+        \begin{gmatrix}[b]
+            1 & 0 \\
+            0 & 1
+            \colops
+            \swap{0}{1}
+        \end{gmatrix}
+        \), to get \(P\)               \\
+        and post-multiply:
+        \(
+        \begin{bmatrix}
+            a & b \\
+            c & d
+        \end{bmatrix}
+        \begin{bmatrix}
+            0 & 1 \\
+            1 & 0
+        \end{bmatrix}
+        \)
+    }                                  \\
+    \brule
+\end{tabular}
 
-            So, the elimination steps shown in the \textit{normal success example} compactly can also be expressed explicitly using elimination matrices:
 
-            $E_{21}$ step:
-
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                3 & 8 & 1 \\
-                0 & 4 & 1
-                \rowops
-                \add[-3]{0}{1}
-            \end{gmatrix}
-            \equiv
-            \begin{bmatrix}
-                1  & 0 & 0 \\
-                -3 & 1 & 0 \\
-                0  & 0 & 1
-            \end{bmatrix}
-            \begin{gmatrix}[b]
-                \boxed{1} & 2 & 1 \\
-                3 & 8 & 1 \\
-                0 & 4 & 1
-            \end{gmatrix}
-        }
-
-        \sectionboxnew{
-            \subsection{Permutation matrices}
-            Permutation matrices ($P$), are a group of square matrices obtained by exchanging either the rows or the columns of an \textit{identity matrix}. In matrix operations, these matrices are used for swapping rows or/and columns of a matrix.
-
-            \begin{tabular}{@{}ll@{}}\trule
-                \textrm{Task} & \textrm{Execution}         \\ \mrule
-                \makecell[tl]{Swap rows,
-                    $\begin{gmatrix}[b]
-                            a & b \\
-                            c & d
-                            \rowops
-                            \swap{0}{1}
-                        \end{gmatrix}$,          \\to get
-                    $\begin{gmatrix}[b]
-                            c & d \\
-                            a &\ b
-                        \end{gmatrix}
-                    $}
-                              &
-                \makecell[tl]{Swap rows,
-                    \begin{gmatrix}[b]
-                        1 & 0 \\
-                        0 & 1
-                        \rowops
-                        \swap{0}{1}
-                    \end{gmatrix}, to get $P$ \\
-                    and pre-multiply:
-                    $\begin{bmatrix}
-                            0 & 1 \\
-                            1 & 0
-                        \end{bmatrix}
-                        \begin{bmatrix}
-                            a & b \\
-                            c & d
-                        \end{bmatrix}$
-                }                                          \\ \mrule
-                \makecell[tl]{Swap columns,
-                    $\begin{gmatrix}[b]
-                            a & b \\
-                            c & d
-                            \colops
-                            \swap{0}{1}
-                        \end{gmatrix}$,          \\to get
-                    $\begin{gmatrix}[b]
-                            b & a \\
-                            d &\ c
-                        \end{gmatrix}
-                    $}
-                              &
-                \makecell[tl]{Swap columns,
-                    \begin{gmatrix}[b]
-                        1 & 0 \\
-                        0 & 1
-                        \colops
-                        \swap{0}{1}
-                    \end{gmatrix}, to get $P$ \\
-                    and post-multiply:
-                    $\begin{bmatrix}
-                            a & b \\
-                            c & d
-                        \end{bmatrix}
-                        \begin{bmatrix}
-                            0 & 1 \\
-                            1 & 0
-                        \end{bmatrix}$
-                }                                          \\
-                \brule
-            \end{tabular}
-        }
-        }
-
-        \onlyinsubfile{\end{multicols*}}
+% ==============================================================================
+% END DOCUMENT
+% ==============================================================================
 \end{document}
