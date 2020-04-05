@@ -19,9 +19,9 @@
 
 % set document information
 \title{MIT 18.06 Notes}
-\author{Ashirwad Barnwal}					% optional, delete if unchanged
-\myemail{ashirwad1992@gmail.com}			% optional, delete if unchanged
-\mywebsite{https://ashirwad.netlify.com/}			% optional, delete if unchanged
+\author{Ashirwad Barnwal}                                       % optional, delete if unchanged
+\myemail{ashirwad1992@gmail.com}                        % optional, delete if unchanged
+\mywebsite{https://ashirwad.netlify.com/}                       % optional, delete if unchanged
 
 
 % My packages
@@ -35,6 +35,22 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{subfiles}
+
+% From SO: https://tex.stackexchange.com/a/299241/180993
+% \aug is a vertical strut that can be placed between columns of a matrix
+\newcommand\aug{\fboxsep=-\fboxrule\!\!\!\fbox{\strut}\!\!\!}
+
+% From SO: https://tex.stackexchange.com/a/146730/180993 
+% patch gauss macros for doing their work in `align'
+% and other amsmath environments; see
+% http://tex.stackexchange.com/questions/146532/
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\g@matrix
+ {\vbox\bgroup}
+ {\vbox\bgroup\normalbaselines}% restore the standard baselineskip
+ {}{}
+\makeatother
 
 \newcommand{\BAR}{%
   \hspace{-\arraycolsep}%
@@ -67,7 +83,7 @@
 
 \subfile{lectures/lec01_the-geometry-of-linear-equations}
 \subfile{lectures/lec02_elimination-with-matrices}
-% \subfile{lectures/lec03_multiplication-and-inverse-matrices}
+\subfile{lectures/lec03_multiplication-and-inverse-matrices}
 % \subfile{lectures/lec04_factorization-into-a-equals-lu}
 
 
