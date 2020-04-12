@@ -1,44 +1,69 @@
-% Lecture 4: Factorization into A equals LU
+% ==============================================================================
+% Build Document Locally with Arara
+% ==============================================================================
+
+% arara: latexmk: {options: [-pv]}
+% arara: indent: {overwrite: yes, silent: yes, cruft: build/}
 \documentclass[../main.tex]{subfiles}
 
+% ==============================================================================
+% BEGIN DOCUMENT
+% ==============================================================================
 \begin{document}
 
-\onlyinsubfile{\begin{multicols*}{4}}
 
-\section{Factorization into A equals LU}
+% SECTION ======================================================================
+\section{Factorization into A Equals LU}
 
 
-\subsection{Rules of inverses and transposes}
-Transpose of a matrix $A$, generally denoted as $A^{T}$, is a matrix obtained by exchanging the rows and columns of matrix $A$. So, a matrix element at $(i, j)$ position in $A$ gets moved to $(j, i)$ position in $A^{T}$. \\
+% SUBSECTION ===================================================================
+\subsection{Overview}
+% ==============================================================================
+This lecture
 
-The following are the rules for finding inverses and transposes for a product of matrices:
-\begin{enumerate}
-    \item Inverse of a product of matrices is equal to the product of the inverses in the reverse order, i.e.,
-          \[(AB)^{-1} = B^{-1}A^{-1}\]
-    \item Similarly, transpose of a product of matrices is equal to the product of the transposes in the reverse order, i.e.,
-          \[(AB)^{T} = B^{T}A^{T}\]
-\end{enumerate}
-Recall the definition of an inverse: $AA^{-1} = I$, and take the transpose on both sides:
+% SUBSECTION ===================================================================
+\subsection{Transpose of A and AB}
+% ==============================================================================
+\emph{Transpose} of a matrix \(A\), generally denoted as \(A^{T}\), is a matrix obtained by exchanging the rows and columns of matrix \(A\). So, the matrix element at \((i, j)\) position in \(A\) gets moved to \((j, i)\) position in \(A^{T}\).
+\vspace{0.5em}
+
+The rule for finding the transpose of a product of matrices is slightly different and involves taking the transpose of the matrices separately and multiplying them in the reverse order. So, for example, the transpose of a product of two matrices, say \(A\) and \(B\), is calculated as follows:
+\[
+    (AB)^{T} = B^{T}A^{T}
+\]
+
+
+% SUBSECTION ===================================================================
+\subsection{Inverse of AB and A transpose}
+% ==============================================================================
+Similar to the case for transposes, the inverse of a product of matrices is obtained by first calculating the inverse of each individual matrix and then multiplying them together in the reverse order. So, for example, the inverse of a product of two matrices, say \(A\) and \(B\), is calculated as follows:
+\[
+    (AB)^{-1} = B^{-1}A^{-1}
+\]
+To obtain the inverse of \(A^{T}\), first recall the definition of an inverse: \(AA^{-1} = I\), and then take the transpose on both sides:
 \[
     (AA^{-1})^{T} = I^{T} = I
 \]
-Also, from the rule for the transpose of a product of matrices, $(AA^{-1})^{T}$ can be expressed as:
+Next, use the rule for the transpose of a product of matrices and express \((AA^{-1})^{T}\) as:
 \[
     (AA^{-1})^{T} = (A^{-1})^{T}A^{T}
 \]
-Comparing the two different expressions for $(AA^{-1})^T$, we get the following:
+Finally, compare the two different expressions for \((AA^{-1})^{T}\) to obtain the following:
 \[
-    (A^{-1})^{T}A^{T} = I \implies \text{$(A^{-1})^{T}$ is the inverse of $A^{T}$}
+    (A^{-1})^{T}A^{T} = I \implies \text{\((A^{-1})^{T}\) is the inverse of \(A^{T}\)}
 \]
-\\
-So, if we know the inverse of $A$, we can take its transpose to get the inverse of $A^{T}$.
+\vspace{0.5em}
+
+So, to get the inverse of \(A^{T}\), first calculate the inverse of \(A\) and then take its transpose. In other words, transposing and inversing can be done in either order for a single matrix.
 
 
-
+% ==============================================================================
 \subsection{A equals LU factorization for 2-by-2 equations}
-Recall that the  goal of Gaussian elimination is to transform the coefficient matrix $A$ into an upper-triangular matrix $U$ by pre-multiplying a series of elimination matrices. \\
+% ==============================================================================
+Recall that the  goal of Gaussian elimination is to transform the coefficient matrix \(A\) into an upper-triangular matrix \(U\) by pre-multiplying \(A\) with a series of elimination matrices.
+\vspace{0.5em}
 
-Let's consider the following $2 \times 2$ coefficient matrix and its elimination matrix:
+Let's consider the following \(2 \times 2\) coefficient matrix and its elimination matrix:
 \[
     A
     =
@@ -53,7 +78,7 @@ Let's consider the following $2 \times 2$ coefficient matrix and its elimination
         -4 & 1
     \end{bmatrix*}
 \]
-Now, let's multiply $A$ and $E_{21}$ matrices to get the upper-triangular matrix $U$:
+Now, let's multiply \(A\) and \(E_{21}\) matrices to get the upper-triangular matrix \(U\):
 \[
     \begin{bmatrix*}[r]
         1 & 0 \\
@@ -69,7 +94,7 @@ Now, let's multiply $A$ and $E_{21}$ matrices to get the upper-triangular matrix
         0 & 3
     \end{bmatrix*}
 \]
-Subsequently, multiply both sides by $E_{21}^{-1}$ to get the $A = LU$ factorization:
+Subsequently, multiply both sides by \(E_{21}^{-1}\) to get the \(A = LU\) factorization:
 \[
     \begin{bmatrix*}[r]
         1 & 0 \\
@@ -93,7 +118,7 @@ Subsequently, multiply both sides by $E_{21}^{-1}$ to get the $A = LU$ factoriza
         0 & 3
     \end{bmatrix*}
 \]
-The multiplication $E_{21}$ and $E_{21}^{-1}$results in an identity matrix ($I$) and the subsequent multiplication of $I$ with $A$ leaves $A$ unchanged and results in the following equation:
+The multiplication of \(E_{21}^{-1}\) and \(E_{21}\) results in an identity matrix (\(I\)) and the subsequent multiplication of \(I\) with \(A\) leaves \(A\) unchanged and results in the following equation:
 \[
     \begin{aligned}
         \underbracket[0pt][0pt]{
@@ -115,7 +140,7 @@ The multiplication $E_{21}$ and $E_{21}^{-1}$results in an identity matrix ($I$)
                 0 & 3
             \end{bmatrix*}
         }_{\mathstrut U}
-        \text{or} \\
+        \text{, or} \\
          &
         =
         \underbracket[0pt][0pt]{
@@ -138,20 +163,15 @@ The multiplication $E_{21}$ and $E_{21}^{-1}$results in an identity matrix ($I$)
         }_{\mathstrut U}
     \end{aligned}
 \]
+Here \(L\) stands for the \emph{lower-triangular matrix}, and \(D\) stands for the \emph{diagonal matrix}.
 
 
-
+% ==============================================================================
 \subsection{A equals LU factorization for 3-by-3 equations}
-Let's consider the $3 \times 3$ coefficient matrix $A$ and its elimination matrices:
+% ==============================================================================
+Let's consider a general \(3 \times 3\) coefficient matrix \(A\) and assume it has the following elimination matrices:
 \[
     \begin{gathered}
-        A
-        =
-        \begin{bmatrix*}[r]
-            1 & 0 & 1 \\
-            0 & 1 & 0 \\
-            0 & 0 & 1
-        \end{bmatrix*};
         E_{21}
         =
         \begin{bmatrix*}[r]
@@ -171,12 +191,12 @@ Let's consider the $3 \times 3$ coefficient matrix $A$ and its elimination matri
         \begin{bmatrix*}[r]
             1 & 0 & 0 \\
             0 & 1 & 0 \\
-            0 & -5 &
+            0 & -5 & 1
         \end{bmatrix*}
-        \text{\makecell[tl]{\textbf{Note:} $E_{31}$ is an identity matrix and \\ will be omitted from here on}}
+        \text{\makecell{\textbf{Note:} \(E_{31}\) is an identity matrix and \\ will be omitted from here on}}
     \end{gathered}
 \]
-The multiplication of the elimination matrices, $E_{32}$, $E_{31}$ and $E_{21}$, gives an overall elimination matrix $E$ that sits on the left of $A$:
+The multiplication of the elimination matrices, \(E_{32}\), \(E_{31}\) and \(E_{21}\), gives an overall elimination matrix \(E\) that sits on the left of \(A\):
 \[
     \underbrace{E_{32}E_{31}E_{21}}_{E}A = U \text{ (no row exchanges)}
 \]
@@ -204,7 +224,7 @@ The multiplication of the elimination matrices, $E_{32}$, $E_{31}$ and $E_{21}$,
         \end{bmatrix*}
     }_{\mathstrut E}
 \]
-The lower-triangular matrix $L$ that sits on the left of  upper-triangular matrix $U$ is obtained as follows:
+The lower-triangular matrix \(L\) that sits on the left of the upper-triangular matrix \(U\) is obtained as follows:
 \[
     \begin{aligned}
         A & = (E_{32}E_{31}E_{21})^{-1}U                          \\
@@ -235,100 +255,89 @@ The lower-triangular matrix $L$ that sits on the left of  upper-triangular matri
         \end{bmatrix*}
     }_{\mathstrut L}
 \]
-Notice that when no row exchanges are performed, multipliers go directly into $L$.
+Notice that when no row exchanges are performed, multipliers go directly into \(L\).
 
 
+% SUBSECTION ===================================================================
+\subsection{Cost of Gaussian elimination}
+% ==============================================================================
+Solving a system of linear equations using Gaussian elimination is computationally expensive. Let's see how many operations are needed on an \(n \times n\) matrix \(A\) to perform elimination, i.e., to go from matrix \(A\) to matrix \(U\).
+\vspace{0.5em}
 
-    \subsection{Gaussian elimination cost}
-    Solving a system of linear equations using Gaussian elimination is computationally expensive. Let's see how many operations are needed on an $n \times n$ matrix $A$ to perform elimination, i.e., to go from $A$ to $U$. \\
-
-    Say, n is equal to 100. So, the first step of elimination that cleans off the elements below the first pivot will modify $99 \times 100$ elements. The second step that cleans off the elements below the second pivot will modify $98 \times 99$ elements and so on. Mathematically, the cost of elimination can be expressed as:
-    \[
-        n^2 + (n - 1)^2 + \ldots + 3^2 + 2^2 + 1^2 \approx \frac{n^3}{3}
-    \]
-    Similarly, the cost of fixing the right-hand side vector $b$ is $n^2$. So, we pay a higher price to split $A$ into $LU$.
+Say, \(n\) is equal to 100. So, the first step of elimination that cleans off the elements below the first pivot will modify \(99 \times 100\) elements. The second step that cleans off the elements below the second pivot will modify \(98 \times 99\) elements and so on. Mathematically, the cost of elimination can be expressed as:
+\[
+    n^2 + (n - 1)^2 + \dots + 3^2 + 2^2 + 1^2 \approx \frac{n^3}{3}
+\]
+Similarly, the cost of fixing the right-hand side vector \(b\) is \(n^2\). So, in general, it's expensive to split \(A\) into \(LU\), but once it's done, the right-hand sides \(b\) can be processed at a relatively lower cost.
 
 
+% SUBSECTION ===================================================================
+\subsection{Permutation matrices}
+% ==============================================================================
+Recall that permutation matrices are square matrices that are obtained by exchanging rows of an identity matrix. These matrices are typically used in Gaussian elimination to perform row exchanges when there is a zero at the pivot position and a non-zero element below it.
+\vspace{0.5em}
 
-    \subsection{Permutation matrices}
-    Recall that permutation matrices are square matrices that are obtained by exchanging rows of an identity matrix. These matrices are typically used in Gaussian elimination to perform row exchanges when there is a zero at the pivot position and a non-zero element below it. \\
-
-    For a $3 \times 3$ identity matrix, the following $6(3!)$ permutation matrices can be obtained by exchanging its rows:
-    \[
-        \begin{gathered}
-            P_{12}
-            =
-            \begin{bmatrix}
-                0 & 1 & 0 \\
-                1 & 0 & 0 \\
-                0 & 0 & 1
-            \end{bmatrix};
-            P_{13}
-            =
-            \begin{bmatrix}
-                0 & 0 & 1 \\
-                0 & 1 & 0 \\
-                1 & 0 & 0
-            \end{bmatrix};
-            P_{23}
-            =
-            \begin{bmatrix}
-                1 & 0 & 0 \\
-                0 & 0 & 1 \\
-                0 & 1 & 0
-            \end{bmatrix}; \\
-            P_{231}
-            =
-            \begin{bmatrix}
-                0 & 1 & 0 \\
-                0 & 0 & 1 \\
-                1 & 0 & 0
-            \end{bmatrix};
-            P_{312}
-            =
-            \begin{bmatrix}
-                0 & 0 & 1 \\
-                1 & 0 & 0 \\
-                0 & 1 & 0
-            \end{bmatrix};
-            I
-            =
-            \begin{bmatrix}
-                1 & 0 & 0 \\
-                0 & 1 & 0 \\
-                0 & 0 & 1
-            \end{bmatrix}
-        \end{gathered}
-    \]
-    The notation used for denoting permutation matrices has the following meaning:
-    \begin{itemize}
-        \item $P_{12}$ denotes a permutation matrix that when pre-multiplied to a matrix $A$ will exchange its rows 1 and 2
-        \item $P_{231}$ denotes a permutation matrix that when pre-multiplied to a matrix $A$ will rearrange its rows in the following manner: row 2 becomes row 1, row 3 becomes row 2, and row 1 becomes row 3
-        \item $I$ denotes the identity matrix, a special type of permutation matrix that does nothing
-    \end{itemize}
-    Permutation matrices also have the following two important properties:
-    \begin{enumerate}[label = Property \arabic*., itemindent = *]
-        \item Inverses are the transposes for permutation matrices, i.e., $P^{T} = P^{-1}$. In other words, to find the inverse of a permutation matrix, just take its transpose.
-        \item Multiplying any two permutation matrices in the group results in another permutation matrix that belongs to the same group.
-    \end{enumerate}
-    Similar to exchanging rows, columns of a matrix $A$ can also be exchanged by exchanging the corresponding columns of the identity matrix and post-multiplying it to $A$.
-    \[
-        \begin{bmatrix}
-            a & b \\
-            c & d
-        \end{bmatrix}
-        \begin{bmatrix}
-            0 & 1 \\
-            1 & 0
-        \end{bmatrix}
+For a \(3 \times 3\) identity matrix, the following \(6(3!)\) permutation matrices can be obtained by exchanging its rows:
+\[
+    \begin{gathered}
+        P_{12}
         =
         \begin{bmatrix}
-            b & a \\
-            d & c
+            0 & 1 & 0 \\
+            1 & 0 & 0 \\
+            0 & 0 & 1
+        \end{bmatrix};
+        P_{13}
+        =
+        \begin{bmatrix}
+            0 & 0 & 1 \\
+            0 & 1 & 0 \\
+            1 & 0 & 0
+        \end{bmatrix};
+        P_{23}
+        =
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 0 & 1 \\
+            0 & 1 & 0
+        \end{bmatrix}; \\
+        P_{231}
+        =
+        \begin{bmatrix}
+            0 & 1 & 0 \\
+            0 & 0 & 1 \\
+            1 & 0 & 0
+        \end{bmatrix};
+        P_{312}
+        =
+        \begin{bmatrix}
+            0 & 0 & 1 \\
+            1 & 0 & 0 \\
+            0 & 1 & 0
+        \end{bmatrix};
+        I
+        =
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
         \end{bmatrix}
-    \]
+    \end{gathered}
+\]
+The notation used for denoting permutation matrices has the following meaning:
+\begin{itemize}
+    \item \(P_{12}\) denotes a permutation matrix that when pre-multiplied to a matrix \(A\) will exchange its rows 1 and 2
+    \item \(P_{231}\) denotes a permutation matrix that when pre-multiplied to a matrix \(A\) will rearrange its rows in the following manner: row 2 becomes row 1, row 3 becomes row 2, and row 1 becomes row 3
+    \item \(I\) denotes the identity matrix, a special type of permutation matrix that does nothing
+\end{itemize}
+Permutation matrices also have the following two important properties:
+\begin{enumerate}
+    \item Inverses are the transposes for permutation matrices, i.e., \(P^{T} = P^{-1}\). In other words, to find the inverse of a permutation matrix, just take its transpose.
+    \item Multiplying any two permutation matrices in the group results in another permutation matrix that belongs to the same group.
+\end{enumerate}
 
 
-\onlyinsubfile{\end{multicols*}}
-
+% ==============================================================================
+% END DOCUMENT
+% ==============================================================================
 \end{document}
